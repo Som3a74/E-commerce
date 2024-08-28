@@ -64,6 +64,9 @@ const config = {
         grayUI: {
           DEFAULT: "var(--grayUI)",
         },
+        grayUI2: {
+          DEFAULT: "var(--grayUI2)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
