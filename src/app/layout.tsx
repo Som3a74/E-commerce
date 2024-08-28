@@ -3,9 +3,9 @@ import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
-import Footer from './../components/component/Footer';
+import Footer from '../components/component/Footer/Footer';
 import Hadder from '../components/component/navigation/Hadder';
-import NavBar from '../components/component/navigation/NavBar';
+import FooterTop from './../components/component/Footer/FooterTop';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange >
           <Hadder />
           {children}
+          <FooterTop />
           <Footer />
         </ThemeProvider>
       </body>

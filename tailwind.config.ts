@@ -34,9 +34,7 @@ const config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        gray: {
-          DEFAULT: "hsl(var(--gray))",
-        },
+      
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -56,6 +54,15 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        lightUi: {
+          DEFAULT: "var(--lightUi)",
+        },
+        darkUi: {
+          DEFAULT: "var(--darkUi)",
+        },
+        grayUI: {
+          DEFAULT: "var(--grayUI)",
         },
       },
       borderRadius: {

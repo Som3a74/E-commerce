@@ -8,6 +8,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTi
 import { IoMenu } from "react-icons/io5";
 import NavBar from './NavBar';
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge"
 
 export default function Header() {
 
@@ -19,7 +20,7 @@ export default function Header() {
     ];
 
     return (
-        <header className="bg-">
+        <header className="sticky top-0 z-10 bg-lightUi">
             <div className="mx-auto flex h-16 items-center gap-8 px-4 sm:px-6 md:px-10 lg:px-28 shadow-md">
 
                 <Link className="block text-teal-600" href="/">
@@ -93,15 +94,16 @@ export default function Header() {
                         </div>
 
                         <div className='flex items-center gap-4'>
-                            <Link className='flex items-center gap-1 cursor-pointer text-xl' href='/cart'><FiShoppingBag />0</Link>
-                            <Link className='flex items-center gap-1 cursor-pointer text-xl' href='/cart'><FiStar />0</Link>
+                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
+                                <FiShoppingBag className="text-2xl"/>
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
+                            </Link>
+                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
+                                <FiStar className="text-2xl" />
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
+                            </Link>
                             {/* <ModeToggle/> */}
                         </div>
-
-                        {/* <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
-                            <span className="sr-only">Toggle menu</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" ><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                        </button> */}
 
 
                         <Sheet>

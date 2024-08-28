@@ -8,13 +8,13 @@ export default function NavBar({bottomNavigation}:any) {
  
 
     return (
-        <nav aria-label="Global" className="py-5 bg-secondary">
-            <div className="container w-fit ms-0 sm:mx-auto">
-                <ul className="flex items-center gap-6">
+        <nav aria-label="Global" className="py-3 bg-darkUi text-lightUi">
+            <div className="container w-full ms-0 sm:mx-auto">
+                <ul className="flex items-center justify-evenly gap-6">
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant='default'>
+                            <Button variant='outline' className="bg-darkUi">
                                 <span className="flex items-stretch">Select Category <RiArrowDropDownLine className="size-6" /></span>
                             </Button>
                         </DropdownMenuTrigger>
