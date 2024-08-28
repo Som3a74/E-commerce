@@ -9,7 +9,7 @@ import Link from "next/link";
 function ProductItem({ ProductsData }: any) {
 
     return (
-        <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-white shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
+        <div key={ProductsData._id} className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-white shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
             <Link className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300" href="#">
                 <Image
                     src={ProductsData.imageCover}
@@ -58,7 +58,7 @@ function ProductItem({ ProductsData }: any) {
                     <MdOutlineCompareArrows />
                 </span>
 
-                <Link href={ProductsData._id} className="w-10 h-10 inline-flex text-black text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                <Link  href={`/productDetails/${ProductsData._id}`} className="w-10 h-10 inline-flex text-black text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
                     <FaEye />
                 </Link>
             </div>
