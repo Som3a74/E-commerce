@@ -1,10 +1,10 @@
-import ProductSide from './_components/ProductSide';
+import AllProducts from './_components/AllProducts';
 
-export default function page() {
+export default function page({ searchParams }: any) {
 
   return (
     <main>
-      <ProductSide />
+      <AllProducts page={searchParams.page} />
     </main>
   )
 }

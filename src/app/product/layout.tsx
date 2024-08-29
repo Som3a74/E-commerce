@@ -1,8 +1,8 @@
-import FiltersSide from "./_components/FiltersSide";
+import FiltersSide from "./_components/(fillter)/FiltersSide";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <div className="mt-10">
+        <div className="my-10">
             <div className='container p-1 mx-auto'>
                 <div className='grid grid-cols-1 md:grid-cols-5 gap-4 justify-items-center'>
 
