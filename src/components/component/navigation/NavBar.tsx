@@ -26,7 +26,7 @@ export default function NavBar({bottomNavigation}:any) {
                     </DropdownMenu>
 
                     {bottomNavigation.map((ele:any) =>
-                        <li className="hidden md:block">
+                        <li key={ele.title} className="hidden md:block">
                             <Link className="font-medium text-md " href={ele.link}>{ele.title}</Link>
                         </li>
                     )}

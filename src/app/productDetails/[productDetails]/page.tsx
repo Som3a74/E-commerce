@@ -1,8 +1,15 @@
 import React from 'react'
+import ProductContainer from '../_components/ProductContainer'
 
-export default function page({ params }: any) {
-  console.log(params.productDetails)
+interface ProductDetailsProps {
+  params: { productDetails: string };
+}
+
+export default function page({ params }: ProductDetailsProps) {
+  // console.log(params.productDetails)
   return (
-    <div>{params.productDetails}</div>
+    <main>
+      <ProductContainer productId={params.productDetails} />
+    </main>
   )
 }
