@@ -9,7 +9,7 @@ import Link from "next/link";
 function ProductItem({ ProductsData }: any) {
 
     return (
-        <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-white shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
+        <div key={ProductsData._id} className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
             <Link className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300" href="#">
                 <Image
                     src={ProductsData.imageCover}
@@ -21,14 +21,17 @@ function ProductItem({ ProductsData }: any) {
             </Link>
 
             <div className="mt-4 px-5 pb-5">
+
                 <a href="#">
                     <h3 className="text-sm font-extrabold text-darkUi line-clamp-1 mb-2">{ProductsData.title}</h3>
                     <h5 className="text-md font-bold tracking-tight text-grayUI2 line-clamp-2">{ProductsData.description}</h5>
                 </a>
+
                 <div className="mt-2 mb-5 flex items-center justify-between flex-wrap">
+                    
                     <p>
-                        <span className="text-3xl font-bold text-slate-900">${ProductsData.price}</span>
-                        <span className="text-sm text-slate-900 line-through">${ProductsData.price + 100}</span>
+                        <span className="text-3xl font-bold text-darkUi">${ProductsData.price}</span>
+                        <span className="text-sm text-darkUi line-through">${ProductsData.price + 100}</span>
                     </p>
 
                     <div className="flex items-center">
@@ -50,15 +53,15 @@ function ProductItem({ ProductsData }: any) {
 
             <div className="absolute top-1 -right-10 flex flex-col h-full group-hover:right-0 duration-300">
 
-                <span className="w-10 h-10 inline-flex text-black text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
                     <CiStar />
                 </span>
 
-                <span className="w-10 h-10 inline-flex text-black text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
                     <MdOutlineCompareArrows />
                 </span>
 
-                <Link href={ProductsData._id} className="w-10 h-10 inline-flex text-black text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                <Link  href={`/productDetails/${ProductsData._id}`} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
                     <FaEye />
                 </Link>
             </div>

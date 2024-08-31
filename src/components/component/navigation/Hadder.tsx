@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { FiShoppingBag, FiStar, FiUser } from "react-icons/fi";
 import { IoClose, IoSearchOutline } from "react-icons/io5";
@@ -9,6 +10,7 @@ import { IoMenu } from "react-icons/io5";
 import NavBar from './NavBar';
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge"
+import { useEffect, useState } from "react";
 
 export default function Header() {
 
@@ -16,10 +18,28 @@ export default function Header() {
         { title: "Home", link: "/" },
         { title: "Shop", link: "/product" },
         { title: "Orders", link: "/orders" },
+        { title: "Brands", link: "/brands" },
         { title: "Blog", link: "/blog" },
     ];
 
+    // console.log(window.location.href);
+    // const [PageUrl, setPageUrl] = useState(false)
+    // useEffect(() => {
+    //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
+        
+    //     return () => {
+    //         setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
+    //     }
+    // }, [window.location.href])
+
+    // useEffect(() => {
+    //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
+    // }, [])
+    // console.log(location.href.includes('register') || location.href.includes('login'));
+
+
     return (
+
         <header className="sticky top-0 z-10 bg-lightUi">
             <div className="mx-auto flex h-16 items-center gap-8 px-4 sm:px-6 md:px-10 lg:px-28 shadow-md">
 
@@ -90,12 +110,12 @@ export default function Header() {
 
                         <div className="flex">
                             {/* <Button className="">sign</Button> */}
-                            <Link className="font-bold text-2xl hidden sm:block" href='/profile'> <FiUser /></Link>
+                            <Link className="font-bold text-2xl hidden sm:block" href='/register'> <FiUser /></Link>
                         </div>
 
                         <div className='flex items-center gap-4'>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
-                                <FiShoppingBag className="text-2xl"/>
+                                <FiShoppingBag className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
                             </Link>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>

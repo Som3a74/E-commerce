@@ -21,7 +21,7 @@ export default async function PopularCategories() {
                             fill
                             className="object-cover object-top rounded-md h-auto group-hover:scale-110 duration-300"
                         />
-                        <span className="absolute bottom-0 pt-3 bg-slate-100 w-full text-center text-sm md:text-base font-bold">{ele.name}</span>
+                        <span className="absolute bottom-0 pt-3 text-darkUi bg-grayUI100 w-full text-center text-sm md:text-base font-bold">{ele.name}</span>
                     </Link>
                 ))}
             </div>

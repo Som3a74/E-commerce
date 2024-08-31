@@ -36,6 +36,7 @@
     --darkUi: #000000;
     --grayUI: #374151;
     --grayUI2: #9b9b9b;
+    --grayUI100: #f1f5f9;
   }
 
   .dark {
@@ -66,10 +67,11 @@
 
 
 
-    --lightUi: #000000;
+    --lightUi: #272626;
     --darkUi: #ffffff;
     --grayUI: #374151;
     --grayUI2: #9b9b9b;
+    --grayUI100: #282828;
   }
 }
 
