@@ -1,8 +1,13 @@
 "use client"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { DataSpecificType } from '../../../types/SpecificProductType';
 
-export default function ProductSlider({ productData }: any) {
+interface props {
+  productData: DataSpecificType
+}
+
+export default function ProductSlider({ productData }: props) {
 
   const [BigImage, setBigImage] = useState('')
 
@@ -10,9 +15,9 @@ export default function ProductSlider({ productData }: any) {
     <div className='flex items-start'>
 
       <div>
-        {productData.images.map((url: any, index: any) =>
+        {productData.images.map((url) =>
           <Image
-            key={index}
+            key={url}
             src={url}
             alt={url}
             width={100}

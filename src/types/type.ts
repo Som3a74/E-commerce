@@ -1,9 +1,3 @@
-export interface UpdateUserDto {
-    username?: string;
-    email?: string;
-    password?: string;
-}
-
 export type FormData = {
     email: string;
     githubUrl: string;
@@ -12,13 +6,13 @@ export type FormData = {
     confirmPassword: string;
 };
 
-export interface AllProducts {
+export interface AllProductsType {
     results: number;
     metadata: Metadata;
-    data: Datum[];
+    data: TypeProductsDate[];
 }
 
-export interface Datum {
+export interface TypeProductsDate {
     sold: number;
     images: string[];
     subcategory: Brand[];
@@ -58,5 +52,6 @@ export interface Metadata {
     currentPage: number;
     numberOfPages: number;
     limit: number;
-    nextPage: number;
+    nextPage?: number;
+    prevPage?: number;
 }

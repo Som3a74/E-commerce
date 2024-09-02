@@ -1,6 +1,11 @@
 import Image from 'next/image'
+import { BrandSpecificType } from './../../../types/brandsType';
 
-export default async function page({ params }: any) {
+interface props {
+  params: { brandDetails: string }
+}
+
+export default async function page({ params }: props) {
 
 
   let request = await fetch(`${process.env.BASEURL}/api/v1/brands/${params.brandDetails}`);
@@ -8,7 +13,7 @@ export default async function page({ params }: any) {
   if (!request.ok) {
     throw new Error('Failed to fetch brands')
   }
-  const brandsData: any = await request.json();
+  const brandsData: BrandSpecificType = await request.json();
 
   return (
     <main className='py-10 bg-gray-100 h-[82vh]'>

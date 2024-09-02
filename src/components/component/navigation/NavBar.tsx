@@ -2,10 +2,15 @@ import Link from "next/link";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { TypeNavigationItem } from "../../../utility/HeaderData";
 
-export default function NavBar({bottomNavigation}:any) {
+type props = {
+    bottomNavigation: TypeNavigationItem[]
+}
 
- 
+export default function NavBar({ bottomNavigation }: props) {
+
+
 
     return (
         <nav aria-label="Global" className="py-3 bg-darkUi text-lightUi">
@@ -25,7 +30,7 @@ export default function NavBar({bottomNavigation}:any) {
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    {bottomNavigation.map((ele:any) =>
+                    {bottomNavigation.map((ele) =>
                         <li key={ele.title} className="hidden md:block">
                             <Link className="font-medium text-md " href={ele.link}>{ele.title}</Link>
                         </li>

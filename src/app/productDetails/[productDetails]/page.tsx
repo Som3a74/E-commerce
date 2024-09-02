@@ -1,11 +1,11 @@
 import React from 'react'
 import ProductContainer from '../_components/ProductContainer'
 
-interface ProductDetailsProps {
+interface props {
   params: { productDetails: string };
 }
 
-export default function page({ params }: ProductDetailsProps) {
+export default function page({ params }: props) {
   // console.log(params.productDetails)
   return (
     <main>

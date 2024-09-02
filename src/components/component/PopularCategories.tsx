@@ -1,19 +1,20 @@
 import SectionHadder from './SectionHadder';
 import Image from 'next/image';
 import Link from 'next/link';
+import { TypeAllCategories } from './../../types/categoriesType';
 
 export default async function PopularCategories() {
     let request = await fetch(`${process.env.BASEURL}/api/v1/categories`);
     if (!request.ok) {
         throw new Error('Failed to fetch categories')
     }
-    const CategoryData: any = await request.json();
+    const CategoryData: TypeAllCategories = await request.json();
     return (
         <section>
-            <SectionHadder  linkText='View All Categories' text='Popular categories' link='/' />
+            <SectionHadder linkText='View All Categories' text='Popular categories' link='/' />
 
             <div className='mx-auto py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8'>
-                {CategoryData.data.map((ele: any) => (
+                {CategoryData.data.map((ele) => (
                     <Link key={ele.name} href='/' className='relative h-60 w-full group overflow-hidden cursor-pointer rounded-md'>
                         <Image
                             src={ele.image}
