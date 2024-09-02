@@ -1,6 +1,7 @@
 // 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
+import { AllBrandType } from './../../../types/brandsType';
 
 export default async function AllBrands() {
     let request = await fetch(`${process.env.BASEURL}/api/v1/brands`);
@@ -8,11 +9,11 @@ export default async function AllBrands() {
     if (!request.ok) {
         throw new Error('Failed to fetch brands')
     }
-    const brandsData: any = await request.json();
+    const brandsData: AllBrandType = await request.json();
 
     return (
         <>
-            {brandsData.data.map((ele: any) =>
+            {brandsData.data.map((ele) =>
                 <Link key={ele._id} href={`/brands/${ele._id}`} className='text-center group cursor-pointer'>
                     <Image
                         src={ele.image}

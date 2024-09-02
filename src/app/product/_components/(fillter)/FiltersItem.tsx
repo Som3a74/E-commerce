@@ -1,8 +1,13 @@
 'use client'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { TypeCategoriesData } from '../../../../types/categoriesType';
 
-export default function FiltersItem({ category }: any) {
+interface props {
+    category: TypeCategoriesData
+}
+
+export default function FiltersItem({ category }: props) {
 
     const router = useRouter()
 

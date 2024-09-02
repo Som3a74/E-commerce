@@ -1,32 +1,25 @@
 "use client"
 import Link from "next/link";
-import { FiShoppingBag, FiStar, FiUser } from "react-icons/fi";
-import { IoClose, IoSearchOutline } from "react-icons/io5";
-import { FaChevronDown } from "react-icons/fa";
-import { Button, buttonVariants } from "../../ui/button";
-import { ModeToggle } from './ModeToggle';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet"
-import { IoMenu } from "react-icons/io5";
 import NavBar from './NavBar';
 import { cn } from "@/lib/utils";
+import { IoSearchOutline } from "react-icons/io5";
+import { buttonVariants } from "../../ui/button";
+import { FiShoppingBag, FiStar, FiUser } from "react-icons/fi";
+import { Sheet, SheetClose, SheetContent, SheetTrigger, } from "@/components/ui/sheet"
+import { IoMenu } from "react-icons/io5";
 import { Badge } from "@/components/ui/badge"
-import { useEffect, useState } from "react";
+import { bottomNavigation } from '../../../utility/HeaderData'
+import { ModeToggle } from './ModeToggle';
+// import { useEffect, useState } from "react";
 
 export default function Header() {
 
-    const bottomNavigation = [
-        { title: "Home", link: "/" },
-        { title: "Shop", link: "/product" },
-        { title: "Orders", link: "/orders" },
-        { title: "Brands", link: "/brands" },
-        { title: "Blog", link: "/blog" },
-    ];
 
     // console.log(window.location.href);
     // const [PageUrl, setPageUrl] = useState(false)
     // useEffect(() => {
     //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
-        
+
     //     return () => {
     //         setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
     //     }
@@ -125,7 +118,7 @@ export default function Header() {
                             {/* <ModeToggle/> */}
                         </div>
 
-
+                        {/* mobile NavBar */}
                         <Sheet>
                             <SheetTrigger asChild className="rounded md:hidden hover:text-gray-700 p-1 bg-slate-100">
                                 <IoMenu className="size-10 bg-gray cursor-pointer" />
@@ -146,6 +139,7 @@ export default function Header() {
                                 </nav>
                             </SheetContent>
                         </Sheet>
+
                     </div>
                 </div>
             </div>

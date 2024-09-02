@@ -4,8 +4,13 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useEffect, useRef, useState } from "react"
 import Autoplay from "embla-carousel-autoplay"
 import Image from 'next/image'
+import { TypeCategoriesData } from "@/types/categoriesType"
 
-export default function SliderCategory({ CategoryData }: any) {
+interface props {
+    CategoryData: TypeCategoriesData[]
+}
+
+export default function SliderCategory({ CategoryData }: props) {
     // console.log(CategoryData)
     const plugin = useRef(
         Autoplay({ delay: 2000, stopOnInteraction: true })
@@ -15,7 +20,7 @@ export default function SliderCategory({ CategoryData }: any) {
         <section className="w-full flex items-center justify-center my-5">
             <Carousel className="w-[92%]" plugins={[plugin.current]} onMouseEnter={plugin.current.stop} onMouseLeave={plugin.current.reset}>
                 <CarouselContent className="-ml-1 ">
-                    {CategoryData.map((ele: any) => (
+                    {CategoryData.map((ele) => (
                         <CarouselItem key={ele._id} className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 hover:shadow-sm ">
                             <Card className="cursor-pointer hover:border-blue-500 hover:bg-slate-50">
                                 <CardContent className="flex items-center justify-evenly p-1">

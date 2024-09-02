@@ -1,4 +1,5 @@
 import SliderCategory from "./SliderCategory";
+import { TypeAllCategories } from "@/types/categoriesType";
 
 export default async function Category() {
 
@@ -6,7 +7,7 @@ export default async function Category() {
     if (!request.ok) {
         throw new Error('Failed to fetch categories')
     }
-    const CategoryData: any = await request.json();
+    const CategoryData: TypeAllCategories = await request.json();
     return (
         <SliderCategory CategoryData={CategoryData.data} />
     )

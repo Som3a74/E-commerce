@@ -1,6 +1,10 @@
 import AllProducts from './_components/AllProducts';
 
-export default function page({ searchParams }: any) {
+interface props {
+  searchParams: { page: string }
+}
+
+export default function page({ searchParams }: props) {
 
   return (
     <main>

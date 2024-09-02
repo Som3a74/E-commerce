@@ -1,8 +1,14 @@
 'use client'
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination"
+import { AllProductsType } from "../../../types/type";
 import { useRouter } from 'next/navigation';
 
-export default function PaginationProducts({ ProductsData }: any) {
+
+interface props {
+    ProductsData: AllProductsType
+}
+
+export default function PaginationProducts({ ProductsData }: props) {
     const router = useRouter()
 
     return (

@@ -1,12 +1,16 @@
 import Link from 'next/link'
-import React from 'react'
 
-export default function SectionHadder({text ,linkText , link}:any) {
+type props = {
+  text: String,
+  linkText: String,
+  link: String,
+}
+export default function SectionHadder({ text, linkText, link }: props) {
   return (
     <div className='mt-10'>
       <div className='flex justify-between items-center'>
         <h2 className='text-4xl font-bold'>{text}</h2>
-        <Link href={link} className='font-medium relative group overflow-hidden'>
+        <Link href={`${link}`} className='hidden sm:block font-medium relative group overflow-hidden'>
           {linkText + ` >>`}
           <span className="absolute bottom-0 left-0 w-full block h-[2px] bg-gray-600 -translate-x-[100%] group-hover:translate-x-0 duration-300"></span>
         </Link>

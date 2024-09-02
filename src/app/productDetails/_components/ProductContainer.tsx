@@ -1,5 +1,6 @@
 import ProductInfo from "./ProductInfo";
 import ProductSlider from "./ProductSlider";
+import { SpecificProductType } from './../../../types/SpecificProductType';
 
 interface ProductDetailsProps {
     productId: string;
@@ -13,7 +14,7 @@ export default async function ProductContainer({ productId }: ProductDetailsProp
     if (!request.ok) {
         throw new Error('Failed to fetch categories')
     }
-    const ProductsData: any = await request.json();
+    const ProductsData: SpecificProductType = await request.json();
 
     return (
         <section className="my-10">

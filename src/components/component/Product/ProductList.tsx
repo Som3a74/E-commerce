@@ -7,14 +7,14 @@ export default async function ProductList({ ProductsData }: any) {
 
                 <>
                     <div className=' col-span-4 h-60 flex justify-center items-center font-bold text-3xl'>
-                        category Not available Now
+                        Not available Now
                     </div>
                 </>
 
                 :
                 <>
                     {ProductsData.map((ele: any) =>
-                        <ProductItem key={ProductsData._id} ProductsData={ele} />
+                        <ProductItem  ProductsData={ele} />
                     )}
                 </>
             }
