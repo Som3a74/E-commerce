@@ -14,7 +14,7 @@ export default async function ProductList({ ProductsData }: any) {
                 :
                 <>
                     {ProductsData.map((ele: any) =>
-                        <ProductItem key={ProductsData._id} ProductsData={ele} />
+                        <ProductItem  ProductsData={ele} />
                     )}
                 </>
             }
