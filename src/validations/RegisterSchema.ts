@@ -9,7 +9,7 @@ export const RegisterSchema = z.object({
 
     rePassword: z.string().min(1, { message: "Confirm Password is required" }),
 
-    phone: z.string().min(1, { message: 'Password Confirmation is Require' }),
+    phone: z.string().min(1, { message: 'phone is Require' }),
 
 }).refine((input) => input.password === input.rePassword, {
     message: "Password and Confirm Password does not match",
@@ -17,4 +17,4 @@ export const RegisterSchema = z.object({
 });
 
 
-export type IFormInput = z.infer<typeof RegisterSchema>;
+export type TFormInput = z.infer<typeof RegisterSchema>;
