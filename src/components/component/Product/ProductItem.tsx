@@ -9,7 +9,7 @@ import Link from "next/link";
 function ProductItem({ ProductsData }: any) {
 
     return (
-        <div key={ProductsData._id} className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
+        <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
             <Link className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300" href="#">
                 <Image
                     src={ProductsData.imageCover}
