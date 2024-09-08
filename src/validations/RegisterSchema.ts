@@ -9,7 +9,8 @@ export const RegisterSchema = z.object({
 
     rePassword: z.string().min(1, { message: "Confirm Password is required" }),
 
-    phone: z.string().min(1, { message: 'phone is Require' }),
+    phone: z.string().min(1, { message: 'phone is Require' })
+        .regex(/^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/g, { message: "is Not a Egyption Phone", }),
 
 }).refine((input) => input.password === input.rePassword, {
     message: "Password and Confirm Password does not match",

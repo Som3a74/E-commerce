@@ -10,10 +10,15 @@ import { IoMenu } from "react-icons/io5";
 import { Badge } from "@/components/ui/badge"
 import { bottomNavigation } from '../../../utility/HeaderData'
 import { ModeToggle } from './ModeToggle';
+import { useToken } from "../../../context/SaveToken";
 // import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
+
 
 export default function Header() {
-
+    const { token, saveTokenHandel, getTokenHandel, clearTokenHandel } = useToken()
 
     // console.log(window.location.href);
     // const [PageUrl, setPageUrl] = useState(false)
@@ -29,7 +34,12 @@ export default function Header() {
     //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
     // }, [])
     // console.log(location.href.includes('register') || location.href.includes('login'));
-
+    
+    const router = useRouter()
+    function LogOutHandel() {
+        clearTokenHandel()
+        router.push('/')
+    }
 
     return (
 
@@ -103,7 +113,26 @@ export default function Header() {
 
                         <div className="flex">
                             {/* <Button className="">sign</Button> */}
-                            <Link className="font-bold text-2xl hidden sm:block" href='/register'> <FiUser /></Link>
+                            {/* {!token &&
+                                
+                            } */}
+                            <DropdownMenu>
+
+                                <DropdownMenuTrigger><FiUser className="font-bold text-2xl block" /></DropdownMenuTrigger>
+
+                                {token ?
+                                    <DropdownMenuContent className="font-semibold">
+                                        <DropdownMenuItem><Link href='/'>Profile</Link></DropdownMenuItem>
+                                        <DropdownMenuItem onClick={()=> LogOutHandel()}><div>log out</div></DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                    :
+                                    <DropdownMenuContent className="font-semibold">
+                                        <DropdownMenuItem><Link href='/register'>register</Link></DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                }
+
+
+                            </DropdownMenu>
                         </div>
 
                         <div className='flex items-center gap-4'>
@@ -111,7 +140,7 @@ export default function Header() {
                                 <FiShoppingBag className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
                             </Link>
-                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
+                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
                                 <FiStar className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
                             </Link>
@@ -146,6 +175,6 @@ export default function Header() {
 
 
             <NavBar bottomNavigation={bottomNavigation} />
-        </header>
+        </header >
     )
 }

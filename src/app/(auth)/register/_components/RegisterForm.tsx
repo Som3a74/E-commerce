@@ -7,9 +7,10 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TFormInput, RegisterSchema } from './../../../../validations/RegisterSchema';
 import RegisterInput from './RegisterInput';
-import { useState } from 'react';
 import ErrorMassege from './ErrorMassege';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation'
+import { useToken } from './../../../../context/SaveToken';
 
 
 export default function RegisterForm() {
@@ -17,11 +18,13 @@ export default function RegisterForm() {
     const [isLoading, setLoading] = useState(false)
     const [isError, setisError] = useState<null | string>(null)
 
+    const { token , saveTokenHandel , getTokenHandel , clearTokenHandel } = useToken()
+    console.log(token)
+
     const { register, handleSubmit, formState: { errors }, getFieldState, trigger, setError, } = useForm<TFormInput>({
         mode: 'all',
         resolver: zodResolver(RegisterSchema),
     });
-
 
     const emailOnBlurHandel = async (e: React.FocusEvent<HTMLInputElement>) => {
         await trigger('email')
@@ -49,8 +52,8 @@ export default function RegisterForm() {
             if (!request.ok) {
                 setLoading(false)
                 let error = await request.text()
-                console.log(JSON.parse(error).message)
                 setisError(JSON.parse(error).message)
+                console.log(JSON.parse(error).message)
             }
 
 
@@ -58,11 +61,8 @@ export default function RegisterForm() {
             console.log(JSON.parse(success).message)
 
             if (JSON.parse(success).message === 'success') {
-                router.push('/')
-                // localStorage.setItem('userToken', request.data.token)
-                // saveUserData()
-                // setloadingScreen(false)
-                // navigate('/')
+                saveTokenHandel(JSON.parse(success).token)
+                router.replace('/')
             }
 
         } catch (error) {
@@ -77,7 +77,6 @@ export default function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(SubmitForm)} className="mt-8 grid grid-cols-6 gap-6">
-
             <RegisterInput
                 type='text'
                 register={register}

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Footer from '../components/component/Footer/Footer';
 import Hadder from '../components/component/navigation/Hadder';
 import FooterTop from './../components/component/Footer/FooterTop';
+import { TokenProvider } from "../context/SaveToken";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,10 +22,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange >
-          <Hadder />
-          {children}
-          <FooterTop />
-          <Footer />
+          <TokenProvider>
+            <Hadder />
+            {children}
+            <FooterTop />
+            <Footer />
+            </TokenProvider>
         </ThemeProvider>
       </body>
     </html>

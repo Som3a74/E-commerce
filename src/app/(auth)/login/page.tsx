@@ -7,17 +7,58 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TFormInput, LoginSchema } from './../../../validations/LoginSchema';
 import HadderLogin from './_components/HadderLogin';
+import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { useToken } from '../../../context/SaveToken';
+import ErrorMassege from '../register/_components/ErrorMassege';
 
 
 export default function page() {
+  const router = useRouter()
+  const [isLoading, setLoading] = useState(false)
+  const [isError, setisError] = useState<null | string>(null)
+  const { token, saveTokenHandel, getTokenHandel, clearTokenHandel } = useToken()
 
   const { register, handleSubmit, formState: { errors }, setError, } = useForm<TFormInput>({
     mode: 'all',
     resolver: zodResolver(LoginSchema),
   });
 
-  const SubmitForm: SubmitHandler<TFormInput> = (data) => {
-    console.log(data)
+  const SubmitForm: SubmitHandler<TFormInput> = async (data) => {
+    setLoading(true)
+    try {
+      let request = await fetch(`https://ecommerce.routemisr.com/api/v1/auth/signin`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+          cache: 'no-store'
+        }
+      )
+
+      if (!request.ok) {
+        setLoading(false)
+        let error = await request.text()
+        setisError(JSON.parse(error).message)
+        console.log(JSON.parse(error).message)
+      }
+
+
+      let success = await request.text()
+      console.log(JSON.parse(success).message)
+
+      if (JSON.parse(success).message === 'success') {
+        saveTokenHandel(JSON.parse(success).token)
+        router.replace('/')
+      }
+
+    } catch (error) {
+      console.log(error)
+      // console.log(JSON.parse(error.text()))
+    }
+    setLoading(false)
   }
 
 
@@ -46,12 +87,16 @@ export default function page() {
           {errors.password && <h6 className="p-1 text-sm text-red-800">{errors.password.message}</h6>}
         </div>
 
+        {isError &&
+          <ErrorMassege isError={isError} />
+        }
+
         <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-500">No account? <Link className="underline ms-1 font-semibold hover:text-sky-500" href="/register">register</Link></p>
           <Button type='submit'>
-            submit
-            {/* <ImSpinner2 className='animate-spin mx-14 ' /> */}
+            {isLoading ? <ImSpinner2 className='animate-spin mx-14 ' /> : 'Create an account'}
           </Button>
+
+          <p className="text-sm text-gray-500">No account? <Link className="underline ms-1 font-semibold hover:text-sky-500" href="/register">register</Link></p>
         </div>
 
       </form>
