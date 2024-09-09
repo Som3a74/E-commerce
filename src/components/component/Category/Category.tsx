@@ -3,7 +3,7 @@ import { TypeAllCategories } from "@/types/categoriesType";
 
 export default async function Category() {
 
-    let request = await fetch('https://ecommerce.routemisr.com/api/v1/categories');
+    let request = await fetch(`${process.env.BASEURL}/api/v1/categories`);
     if (!request.ok) {
         throw new Error('Failed to fetch categories')
     }

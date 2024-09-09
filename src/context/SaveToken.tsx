@@ -1,6 +1,7 @@
 "use client"
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import Cookies from "universal-cookie";
 
 interface TokenContextType {
     token: string;
@@ -15,30 +16,34 @@ interface TokenProviderProps {
 const TokenContext = createContext<TokenContextType | any | undefined>(undefined);
 
 export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
+    const cookies = new Cookies();
 
     const [token, settoken] = useState<string | null>(null);
 
     useEffect(() => {
-        getTokenHandel()
-    }, [])
-    useEffect(() => {
-        getTokenHandel()
-    }, [token])
+        getTokenHandel();
+    }, [token]);
+
 
 
     function saveTokenHandel(userToken: string) {
-        localStorage.setItem('userToken', userToken);
+        // localStorage.setItem('userToken', userToken);
+        cookies.set('userToken', userToken);
         settoken(userToken)
+
         // decodeToken = jwtDecode(userToken);
     }
+
     function getTokenHandel() {
-        const userToken = localStorage.getItem('userToken');
+        // const userToken = localStorage.getItem('userToken');
+        const userToken = cookies.get('userToken')
         settoken(userToken)
     }
 
     function clearTokenHandel() {
         settoken(null)
-        localStorage.removeItem('userToken')
+        cookies.remove('userToken');
+        // localStorage.removeItem('userToken')
     }
 
     return (
