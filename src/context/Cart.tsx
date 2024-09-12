@@ -1,11 +1,12 @@
 "use client"
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState, useOptimistic } from 'react';
 import { useToken } from './SaveToken';
 import { useToast } from '@/hooks/use-toast';
+import { TLoggedCart } from './../types/CartType';
 
 interface CartContextType {
-    cartNum: string;
-    CartData: string[];
+    cartNum: number;
+    CartData: TLoggedCart;
     ErrorCart: string;
     AddToCartHandel: () => void;
     getCartHandel: () => void;
@@ -15,14 +16,19 @@ interface CartContextType {
 interface CartProviderProps {
     children: ReactNode;
 }
+
+
+// const [optimisticState, addOptimistic] = useOptimistic(0);
+
+
 const CartContext = createContext<CartContextType | any | undefined>(undefined);
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
     const { token, getTokenHandel } = useToken()
     console.log(token)
-    const [CartNum, setCartNum] = useState<string | null>(null);
-    const [CartData, setCartData] = useState<string[] | null>(null);
+    const [CartNum, setCartNum] = useState<number>(0);
+    const [CartData, setCartData] = useState<TLoggedCart | null>(null);
     const [ErrorCart, setisErrorCart] = useState<string | null>(null);
     const { toast } = useToast()
 
@@ -35,7 +41,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                     'token': token,
                 },
                 body: JSON.stringify({ productId: CartId }),
-                cache: 'no-store',
+                // cache: 'no-store',
             });
 
             if (!request.ok) {
@@ -55,10 +61,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                     className: "bg-green-500 text-white",
                     description: JSON.parse(success).message,
                 })
+                getCartHandel();
             }
-
-
-
         } catch (error) {
             console.log(error)
         }
@@ -77,22 +81,20 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 },
                 cache: 'no-store',
             });
-
             if (!request.ok) {
-                let error = await request.text()
-                setisErrorCart(JSON.parse(error).message)
-                console.log(JSON.parse(error).message)
+                let error = await request.json()
+                setisErrorCart(error.message)
+                console.log(error.message)
                 toast({
                     variant: "destructive",
                     description: "please login first",
                 })
-            } else {
-
-                let success = await request.text()
-                console.log(JSON.parse(success))
-
-                setCartNum(JSON.parse(success).numOfCartItems)
-                setCartData(JSON.parse(success))
+            }
+            else {
+                let response: TLoggedCart = await request.json()
+                // console.log(response)
+                setCartNum(response.numOfCartItems)
+                setCartData(response)
             }
 
         } catch (error) {
@@ -104,6 +106,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         console.log('hello');
     }
 
+
+    useEffect(() => {
+        if (token) {
+            getCartHandel()
+        }
+    }, [token])
 
 
     return (

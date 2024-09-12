@@ -1,6 +1,12 @@
 import ProductSide from "../_components/ProductSide"
 
-export default function page({ searchParams }: any) {
+type props = {
+  searchParams: {
+    categoryId: string
+  }
+}
+
+export default function page({ searchParams }: props) {
   // console.log(searchParams.categoryId)
 
   return (

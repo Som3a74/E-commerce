@@ -9,9 +9,14 @@ import { useCart } from "../../../context/Cart";
 import { ImSpinner2 } from "react-icons/im";
 import { useState } from "react";
 import Link from "next/link";
+import { TypeProductsDate } from '../../../types/type';
 
-function ProductItem({ ProductsData }: any) {
-    const {  AddToCartHandel } = useCart()
+type props = {
+    ProductsData: TypeProductsDate
+}
+
+function ProductItem({ ProductsData }: props) {
+    const { AddToCartHandel } = useCart()
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAddToCart = async (productId: string) => {
