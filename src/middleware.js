@@ -3,13 +3,13 @@ import { NextResponse } from "next/server";
 export default function middleware(req) {
   let verify = req.cookies.get("userToken");
   let url = req.url
-  // console.log(verify)
+  
+  // console.log(!verify === false)
+  // console.log("url == " + url.includes('cart'))
 
   if (!verify && url.includes('/cart')) {
-    return NextResponse.redirect("http://localhost:3000/register");
+    console.log('donnnnnnnnnnnnnnnnne');
+    return NextResponse.redirect("http://localhost:3000/login");
   }
 
-  // if (verify && url === "http://localhost:3000/") {
-  //   return NextResponse.redirect("http://localhost:3000/dashboard");
-  // }
 }

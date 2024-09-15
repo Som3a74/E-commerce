@@ -4,8 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 import Cookies from "universal-cookie";
 
 interface TokenContextType {
-    token: string;
-    saveTokenHandel: () => void;
+    token: string | null;
+    saveTokenHandel: (userToken: string) => void;
     getTokenHandel: () => void;
     clearTokenHandel: () => void;
 }
@@ -27,10 +27,12 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
 
 
     function saveTokenHandel(userToken: string) {
-        // localStorage.setItem('userToken', userToken);
-        cookies.set('userToken', userToken);
+        // Set cookie to expire in 7 days (1 week)
+        const oneWeekFromNow = new Date();
+        oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
+        cookies.set('userToken', userToken, { path: '/', expires: oneWeekFromNow });
+        
         settoken(userToken)
-
         // decodeToken = jwtDecode(userToken);
     }
 
@@ -41,8 +43,8 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
     }
 
     function clearTokenHandel() {
+        cookies.remove('userToken',{ path: '/'});
         settoken(null)
-        cookies.remove('userToken');
         // localStorage.removeItem('userToken')
     }
 

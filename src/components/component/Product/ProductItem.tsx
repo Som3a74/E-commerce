@@ -40,10 +40,10 @@ function ProductItem({ ProductsData }: props) {
 
             <div className="mt-4 px-5 pb-5">
 
-                <a href="#">
+                <div>
                     <h3 className="text-sm font-extrabold text-darkUi line-clamp-1 mb-2">{ProductsData.title}</h3>
                     <h5 className="text-md font-bold tracking-tight text-grayUI2 line-clamp-2">{ProductsData.description}</h5>
-                </a>
+                </div>
 
                 <div className="mt-2 mb-5 flex items-center justify-between flex-wrap">
 

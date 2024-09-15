@@ -18,8 +18,8 @@ export default async function ProductList({ ProductsData }: props) {
 
                 :
                 <>
-                    {ProductsData.map((ele: any) =>
-                        <ProductItem ProductsData={ele} />
+                    {ProductsData.map((ele) =>
+                        <ProductItem key={ele._id} ProductsData={ele} />
                     )}
                 </>
             }

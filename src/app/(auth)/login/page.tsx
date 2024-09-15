@@ -50,6 +50,7 @@ export default function page() {
       console.log(JSON.parse(success).message)
 
       if (JSON.parse(success).message === 'success') {
+        console.log('save');
         saveTokenHandel(JSON.parse(success).token)
         router.replace('/')
       }
