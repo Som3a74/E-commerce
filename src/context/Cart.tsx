@@ -10,6 +10,7 @@ interface CartContextType {
     CartData: TLoggedCart | null;
     cartproducts: ProductElement[] | [];
     ErrorCart: string | null;
+    totalPrice: number;
     EmptyCart: boolean;
     loadingQuantity: boolean;
     AddToCartHandel: (productId: string) => Promise<void>;
@@ -37,10 +38,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [CartID, setCartID] = useState<(string)[]>([]);
     const [cartproducts, setcartproducts] = useState<ProductElement[] | []>([]);
     const [ErrorCart, setisErrorCart] = useState<string | null>(null);
+    const [totalPrice, setistotalPrice] = useState<number>(0);
     const [EmptyCart, setisEmptyCart] = useState<boolean>(false);
     const [loadingQuantity, setisloadingQuantity] = useState<boolean>(false);
     const { toast } = useToast()
     console.log(token)
+    // console.log(cartproducts)
 
     async function AddToCartHandel(productId: string) {
         setisEmptyCart(false);
@@ -113,8 +116,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 setcartNum(response.numOfCartItems)
                 setCartData(response)
                 setCartID(response.data.products.map(ele => ele.product._id))
-                console.log(response.data.products.map(ele => ele._id))
                 setcartproducts(response.data.products)
+                setistotalPrice(response?.data?.totalCartPrice)
                 if (+response?.numOfCartItems === 0) {
                     setisEmptyCart(true)
                 }
@@ -125,9 +128,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
 
 
-
     async function UpdateCartProductQuantity(productId: string, productCount: number) {
-        // const currPro = cartproducts.find((item) => item.product._id === productId)
+
+        const CurrProduct = cartproducts.find(item => item.product._id === productId)
+        if(CurrProduct){
+            setistotalPrice(e => e + CurrProduct.price)
+        }
 
         setcartproducts(currItems => {
             if (currItems.find(item => item.product._id === productId) === null) {
@@ -182,7 +188,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
 
 
-
     async function RemoveSpecificCartItem(productId: string) {
         setcartproducts((oldCart) => oldCart.filter((item) => item.product._id !== productId))
 
@@ -224,6 +229,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     async function clearCartHandel() {
         setisEmptyCart(true);
         setcartNum(0)
+        setistotalPrice(0)
         setcartproducts([])
         setCartID([])
         setCartData(null)
@@ -266,7 +272,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cartNum, loadingQuantity, CartData, cartproducts, ErrorCart, EmptyCart, AddToCartHandel, getCartHandel, UpdateCartProductQuantity, RemoveSpecificCartItem, clearCartHandel }}>
+        <CartContext.Provider value={{ cartNum, loadingQuantity, totalPrice, CartData, cartproducts, ErrorCart, EmptyCart, AddToCartHandel, getCartHandel, UpdateCartProductQuantity, RemoveSpecificCartItem, clearCartHandel }}>
             {children}
         </CartContext.Provider>
     );

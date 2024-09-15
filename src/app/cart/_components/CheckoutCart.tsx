@@ -4,9 +4,10 @@ import { TLoggedCart } from './../../../types/CartType';
 
 type props = {
     CartData: TLoggedCart
+    totalPrice: number
 }
 
-export default function CheckoutCart({ CartData }: props) {
+export default function CheckoutCart({ CartData , totalPrice }: props) {
     // await new Promise((resolve)=> setTimeout(resolve, 3000))
     return (
         <section aria-labelledby="summary-heading" className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
@@ -16,7 +17,7 @@ export default function CheckoutCart({ CartData }: props) {
                 <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Subtotal</span>
                     <div className="text-sm font-medium text-gray-900">
-                        <span>${CartData.data.totalCartPrice + ((CartData.data.totalCartPrice * .3) - 30)}</span>
+                        <span>${totalPrice + ((totalPrice * .3) - 30)}</span>
                     </div>
                 </div>
 
@@ -52,7 +53,7 @@ export default function CheckoutCart({ CartData }: props) {
                 <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                     <h3 className="text-base font-medium text-gray-900">Order total</h3>
                     <div className="text-lg font-bold text-gray-900">
-                        <span>${CartData.data.totalCartPrice}</span>
+                        <span>${totalPrice}</span>
                     </div>
                 </div>
             </dl>

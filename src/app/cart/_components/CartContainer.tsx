@@ -12,7 +12,7 @@ import { ImSpinner2 } from 'react-icons/im';
 import { useRouter } from 'next/navigation'
 
 export default function CartContainer() {
-    const { getCartHandel, CartData, EmptyCart, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
+    const { getCartHandel, CartData, totalPrice, EmptyCart, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
     const [isLoading, setIsLoading] = useState(false);
     const { token } = useToken()
     const router = useRouter()
@@ -58,7 +58,7 @@ export default function CartContainer() {
                     </section>
 
 
-                    {CartData ? <CheckoutCart CartData={CartData} /> : <LoadingCheckoutCart />}
+                    {CartData ? <CheckoutCart totalPrice={totalPrice} CartData={CartData} /> : <LoadingCheckoutCart />}
                 </div>
 
                 : <CartEmpty />
