@@ -15,7 +15,7 @@ interface CartContextType {
     loadingQuantity: boolean;
     AddToCartHandel: (productId: string) => Promise<void>;
     RemoveSpecificCartItem: (productId: string) => Promise<void>;
-    UpdateCartProductQuantity: (productId: string, productCount: number) => Promise<void>;
+    UpdateCartProductQuantity: (productId: string, productCount: number, action: string) => Promise<void>;
     getCartHandel: () => void;
     clearCartHandel: () => Promise<void>;
 }
@@ -25,7 +25,6 @@ interface CartProviderProps {
 }
 
 
-// const [optimisticState, addOptimistic] = useOptimistic(0);
 
 
 const CartContext = createContext({} as CartContextType);
@@ -80,8 +79,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 toast({
                     duration: 1500,
                     variant: "default",
-                    className: "bg-green-500 text-white",
-                    description: JSON.parse(success).message,
+                    className: "bg-black text-white",
+                    description: 'Product added successfully to your cart',
                 })
 
             }
@@ -128,11 +127,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
 
 
-    async function UpdateCartProductQuantity(productId: string, productCount: number) {
+    async function UpdateCartProductQuantity(productId: string, productCount: number, action: string) {
 
         const CurrProduct = cartproducts.find(item => item.product._id === productId)
-        if(CurrProduct){
-            setistotalPrice(e => e + CurrProduct.price)
+        if (CurrProduct) {
+            if (action === 'increase') {
+                setistotalPrice(e => e + CurrProduct.price)
+            } else if (action === 'decrease') {
+                setistotalPrice(e => e - CurrProduct.price)
+            }
         }
 
         setcartproducts(currItems => {
@@ -151,7 +154,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         })
 
         setisloadingQuantity(true)
-
+        toast({
+            duration: 1500,
+            variant: "default",
+            className: "bg-black text-white",
+            description: "Update product success",
+        })
         try {
             const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
                 method: 'PUT',
@@ -174,12 +182,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 })
             } else {
                 let success = await request.json()
-                toast({
-                    duration: 1500,
-                    variant: "default",
-                    className: "bg-green-500 text-white",
-                    description: "Update product success",
-                })
             }
         } catch (error) {
             console.log(error)
@@ -190,6 +192,17 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
     async function RemoveSpecificCartItem(productId: string) {
         setcartproducts((oldCart) => oldCart.filter((item) => item.product._id !== productId))
+
+        const CurrProduct = cartproducts.find(item => item.product._id === productId)
+        if (CurrProduct) {
+            setistotalPrice(e => e - CurrProduct.price)
+        }
+        toast({
+            duration: 1500,
+            variant: "default",
+            className: "bg-black text-white",
+            description: "remove product success",
+        })
 
         setcartNum(e => e - 1)
         try {
@@ -213,12 +226,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 })
             } else {
                 let success = await request.json()
-                toast({
-                    duration: 1500,
-                    variant: "default",
-                    className: "bg-green-500 text-white",
-                    description: "remove product success",
-                })
+               
             }
         } catch (error) {
             console.log(error)
@@ -256,7 +264,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 toast({
                     duration: 1500,
                     variant: "default",
-                    className: "bg-green-500 text-white",
+                    className: "bg-black text-white",
                     description: "Clear Cart success",
                 })
             }

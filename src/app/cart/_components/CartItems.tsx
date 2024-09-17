@@ -8,7 +8,7 @@ type props = {
   cartproducts: ProductElement[],
   loadingQuantity: boolean,
   RemoveSpecificCartItem: (productId: string) => Promise<void>
-  UpdateCartProductQuantity: (productId: string, productCount: number) => Promise<void>
+  UpdateCartProductQuantity: (productId: string, productCount: number , action: string) => Promise<void>
 }
 
 export default function CartItems({ cartproducts, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity }: props) {
@@ -19,10 +19,10 @@ export default function CartItems({ cartproducts, loadingQuantity, RemoveSpecifi
 
   async function CountProduct(CartId: string, productCount: number, action: string) {
     if (action === 'increase') {
-      await UpdateCartProductQuantity(CartId, productCount + 1)
+      await UpdateCartProductQuantity(CartId, productCount + 1, action)
     }
     else if (action === 'decrease') {
-      await UpdateCartProductQuantity(CartId, productCount - 1)
+      await UpdateCartProductQuantity(CartId, productCount - 1, action)
     }
   }
 
