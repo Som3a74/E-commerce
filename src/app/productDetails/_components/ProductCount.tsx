@@ -1,9 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { useCart } from "../../../context/Cart"
 import { useState } from "react"
+import { ImSpinner2 } from "react-icons/im"
 
 
 export default function ProductCount({ producId }: any) {
+    const { AddToCartHandel } = useCart()
+
     // const [ShowCount, setShowCount] = useState(false)
     // const [CountNum, setCountNum] = useState(1)
     // function IncreaseCount() {
@@ -15,34 +19,25 @@ export default function ProductCount({ producId }: any) {
     //     console.log(CountNum)
     // }
 
+    const [isLoading, setIsLoading] = useState(false);
 
-    async function AddToCart(producId: String) {
-        // let request = await fetch(`${process.env.BASEURL}/api/v1/cart`);
+    const handleAddToCart = async (productId: string) => {
+        setIsLoading(true);
+        await AddToCartHandel(productId);
+        setIsLoading(false);
+    };
 
-        let request = fetch(`${process.env.BASEURL}/api/v1/cart`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "productId": producId
-            }),
-        })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-
-        if (!request) {
-            throw new Error('Failed to fetch categories')
-        }
-
-        const CategoryData: any = await request.json();
-    }
 
     return (
         <>
 
-            <Button onClick={() => AddToCart(producId)} className="w-full mt-6 py-6 rounded-full">Buy now</Button>
+            <Button
+                disabled={isLoading}
+                onClick={() => handleAddToCart(producId)}
+                className="w-full mt-6 py-6 rounded-full"
+            >
+                {isLoading ? <ImSpinner2 className='animate-spin mx-14' /> : ' Buy now'}
+            </Button>
 
 
 

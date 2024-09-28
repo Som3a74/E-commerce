@@ -1,6 +1,11 @@
+import { TypeProductsDate } from '../../../types/type';
 import ProductItem from './ProductItem';
 
-export default async function ProductList({ ProductsData }: any) {
+type props = {
+    ProductsData: TypeProductsDate[]
+}
+
+export default async function ProductList({ ProductsData }: props) {
     return (
         <section className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center'>
             {!ProductsData.length ?
@@ -13,8 +18,8 @@ export default async function ProductList({ ProductsData }: any) {
 
                 :
                 <>
-                    {ProductsData.map((ele: any) =>
-                        <ProductItem  ProductsData={ele} />
+                    {ProductsData.map((ele) =>
+                        <ProductItem key={ele._id} ProductsData={ele} />
                     )}
                 </>
             }

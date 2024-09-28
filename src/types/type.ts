@@ -1,11 +1,3 @@
-export type FormData = {
-    email: string;
-    githubUrl: string;
-    yearsOfExperience: number;
-    password: string;
-    confirmPassword: string;
-};
-
 export interface AllProductsType {
     results: number;
     metadata: Metadata;

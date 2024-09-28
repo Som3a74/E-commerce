@@ -3,8 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AllBrandType } from './../../../types/brandsType';
 
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+
 export default async function AllBrands() {
-    let request = await fetch(`${process.env.BASEURL}/api/v1/brands`);
+    let request = await fetch(`${baseURL}/api/v1/brands`);
 
     if (!request.ok) {
         throw new Error('Failed to fetch brands')

@@ -11,9 +11,10 @@ import { Badge } from "@/components/ui/badge"
 import { bottomNavigation } from '../../../utility/HeaderData'
 import { ModeToggle } from './ModeToggle';
 import { useToken } from "../../../context/SaveToken";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useCart } from "../../../context/Cart";
 
 
 
@@ -34,7 +35,12 @@ export default function Header() {
     //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
     // }, [])
     // console.log(location.href.includes('register') || location.href.includes('login'));
-    
+
+
+    const { CartData , cartproducts, cartNum } = useCart()
+
+
+
     const router = useRouter()
     function LogOutHandel() {
         clearTokenHandel()
@@ -123,7 +129,7 @@ export default function Header() {
                                 {token ?
                                     <DropdownMenuContent className="font-semibold">
                                         <DropdownMenuItem><Link href='/'>Profile</Link></DropdownMenuItem>
-                                        <DropdownMenuItem onClick={()=> LogOutHandel()}><div>log out</div></DropdownMenuItem>
+                                        <DropdownMenuItem onClick={LogOutHandel}><div>log out</div></DropdownMenuItem>
                                     </DropdownMenuContent>
                                     :
                                     <DropdownMenuContent className="font-semibold">
@@ -138,7 +144,7 @@ export default function Header() {
                         <div className='flex items-center gap-4'>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
                                 <FiShoppingBag className="text-2xl" />
-                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{cartproducts && token ? cartNum : 0}</Badge>
                             </Link>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
                                 <FiStar className="text-2xl" />

@@ -4,11 +4,11 @@ import { BrandSpecificType } from './../../../types/brandsType';
 interface props {
   params: { brandDetails: string }
 }
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 export default async function page({ params }: props) {
-
-
-  let request = await fetch(`${process.env.BASEURL}/api/v1/brands/${params.brandDetails}`);
+  
+  let request = await fetch(`${baseURL}/api/v1/brands/${params.brandDetails}`);
 
   if (!request.ok) {
     throw new Error('Failed to fetch brands')
