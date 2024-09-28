@@ -5,6 +5,13 @@ import Cookies from "universal-cookie";
 
 interface TokenContextType {
     token: string | null;
+    deCodedToken: {
+        id: string;
+        name: string;
+        role: string;
+        iat: number;
+        exp: number;
+    } | null;
     saveTokenHandel: (userToken: string) => void;
     getTokenHandel: () => void;
     clearTokenHandel: () => void;
@@ -19,10 +26,21 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
     const cookies = new Cookies();
 
     const [token, settoken] = useState<string | null>(null);
+    const [deCodedToken, setdeCodedToken] = useState<{} | null>(null);
+
+    console.log(token)
 
     useEffect(() => {
-        getTokenHandel();
-    }, [token]);
+        if (cookies.get('userToken')) {
+            getTokenHandel();
+            EnCodedTokenHandel();
+        }
+    }, []);
+
+
+    // useEffect(() => {
+    //     EnCodedTokenHandel();
+    // }, []);
 
 
 
@@ -31,7 +49,7 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
         const oneWeekFromNow = new Date();
         oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
         cookies.set('userToken', userToken, { path: '/', expires: oneWeekFromNow });
-        
+
         settoken(userToken)
         // decodeToken = jwtDecode(userToken);
     }
@@ -42,14 +60,21 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
         settoken(userToken)
     }
 
+    function EnCodedTokenHandel() {
+        const userToken = cookies.get('userToken')
+        let deuserToken = jwtDecode(userToken)
+        setdeCodedToken(deuserToken)
+    }
+
+
     function clearTokenHandel() {
-        cookies.remove('userToken',{ path: '/'});
+        cookies.remove('userToken', { path: '/' });
         settoken(null)
         // localStorage.removeItem('userToken')
     }
 
     return (
-        <TokenContext.Provider value={{ token, saveTokenHandel, getTokenHandel, clearTokenHandel }}>
+        <TokenContext.Provider value={{ token, deCodedToken, saveTokenHandel, getTokenHandel, clearTokenHandel }}>
             {children}
         </TokenContext.Provider>
     );

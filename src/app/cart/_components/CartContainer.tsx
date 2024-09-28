@@ -12,7 +12,7 @@ import { ImSpinner2 } from 'react-icons/im';
 import { useRouter } from 'next/navigation'
 
 export default function CartContainer() {
-    const { getCartHandel, CartData, totalPrice, EmptyCart, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
+    const { getCartHandel, CartData, totalPrice, EmptyCart, cartNum, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
     const [isLoading, setIsLoading] = useState(false);
     const { token } = useToken()
     const router = useRouter()
@@ -32,12 +32,15 @@ export default function CartContainer() {
         // else {
         //     router.replace('/login')
         // }
-    }, [token])
+    }, [])
 
     return (
         <>
-            {!EmptyCart ?
-                <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+            {EmptyCart || cartNum === 0 ?
+
+                <CartEmpty />
+
+                : <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
 
                     <section aria-labelledby="cart-heading" className="lg:col-span-7">
                         <h2 id="cart-heading" className="sr-only"> Items in your shopping cart</h2>
@@ -61,7 +64,7 @@ export default function CartContainer() {
                     {CartData ? <CheckoutCart totalPrice={totalPrice} CartData={CartData} /> : <LoadingCheckoutCart />}
                 </div>
 
-                : <CartEmpty />
+
             }
         </>
     )

@@ -9,7 +9,7 @@ type props = {
 
 export default async function ProductSide({ category }: props) {
 
-    let request = await fetch(`${process.env.BASEURL}/api/v1/products?${category ? `category[in]=${category}` : ''}`);
+    let request = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/v1/products?${category ? `category[in]=${category}` : ''}`);
 
     if (!request.ok) {
         throw new Error('Failed to fetch categories')

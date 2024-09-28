@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { TypeAllCategories } from './../../types/categoriesType';
 
 export default async function PopularCategories() {
-    let request = await fetch(`${process.env.BASEURL}/api/v1/categories`);
+    let request = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/v1/categories`);
     if (!request.ok) {
         throw new Error('Failed to fetch categories')
     }
@@ -15,7 +15,7 @@ export default async function PopularCategories() {
 
             <div className='mx-auto py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8'>
                 {CategoryData.data.map((ele) => (
-                    <Link key={ele.name} href='/' className='relative h-60 w-full group overflow-hidden cursor-pointer rounded-md'>
+                    <Link key={ele.name} href={`/product/productFilters?categoryId=${ele._id}`} className='relative h-60 w-full group overflow-hidden cursor-pointer rounded-md'>
                         <Image
                             src={ele.image}
                             alt={ele.name}

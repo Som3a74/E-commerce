@@ -1,5 +1,6 @@
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { TLoggedCart } from './../../../types/CartType';
+import Link from "next/link";
 
 
 type props = {
@@ -7,7 +8,7 @@ type props = {
     totalPrice: number
 }
 
-export default function CheckoutCart({ CartData , totalPrice }: props) {
+export default function CheckoutCart({ CartData, totalPrice }: props) {
     // await new Promise((resolve)=> setTimeout(resolve, 3000))
     return (
         <section aria-labelledby="summary-heading" className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8">
@@ -59,12 +60,11 @@ export default function CheckoutCart({ CartData , totalPrice }: props) {
             </dl>
 
             <div className="mt-6">
-                <button
-                    type="submit"
-                    className="w-full rounded-md border border-transparent bg-gray-800 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-black focus:outline-none focus:ring-2 focus:ring-skyText focus:ring-offset-2 focus:ring-offset-gray-50 duration-200"
-                >
-                    Checkout
-                </button>
+                <Link href={`/Checkout`}>
+                    <button className="w-full rounded-md border border-transparent bg-gray-800 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-black focus:outline-none focus:ring-2 focus:ring-skyText focus:ring-offset-2 focus:ring-offset-gray-50 duration-200" >
+                        Checkout
+                    </button>
+                </Link>
             </div>
 
         </section>

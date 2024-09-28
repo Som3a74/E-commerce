@@ -18,14 +18,15 @@ interface CartContextType {
     UpdateCartProductQuantity: (productId: string, productCount: number, action: string) => Promise<void>;
     getCartHandel: () => void;
     clearCartHandel: () => Promise<void>;
+    createCashOrder: (shippingAddress: {}, token: string) => Promise<void>;
 }
 
 interface CartProviderProps {
     children: ReactNode;
 }
 
-
-
+const baseURL = process.env.NEXT_PUBLIC_BASEURL;
+const domain = process.env.NEXT_PUBLIC_DOMAIN;
 
 const CartContext = createContext({} as CartContextType);
 
@@ -41,8 +42,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [EmptyCart, setisEmptyCart] = useState<boolean>(false);
     const [loadingQuantity, setisloadingQuantity] = useState<boolean>(false);
     const { toast } = useToast()
-    console.log(token)
+    // console.log(token)
     // console.log(cartproducts)
+
+    // useEffect(() => {
+    //     getTokenHandel()
+    // }, [])
+
 
     async function AddToCartHandel(productId: string) {
         setisEmptyCart(false);
@@ -53,7 +59,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
 
         try {
-            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
+            const request = await fetch(`${baseURL}/api/v1/cart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +97,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
     async function getCartHandel() {
         try {
-            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
+            const request = await fetch(`${baseURL}/api/v1/cart`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +117,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             }
             else {
                 let response: TLoggedCart = await request.json()
-                // console.log(response)
+                // console.log(response.cartId)
                 setcartNum(response.numOfCartItems)
                 setCartData(response)
                 setCartID(response.data.products.map(ele => ele.product._id))
@@ -161,7 +167,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             description: "Update product success",
         })
         try {
-            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+            const request = await fetch(`${baseURL}/api/v1/cart/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -195,8 +201,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
         const CurrProduct = cartproducts.find(item => item.product._id === productId)
         if (CurrProduct) {
-            setistotalPrice(e => e - CurrProduct.price)
+            setistotalPrice(e => e - (CurrProduct.price * CurrProduct.count))
         }
+        setcartNum(e => e - 1)
         toast({
             duration: 1500,
             variant: "default",
@@ -204,9 +211,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             description: "remove product success",
         })
 
-        setcartNum(e => e - 1)
         try {
-            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
+            const request = await fetch(`${baseURL}/api/v1/cart/${productId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -226,7 +232,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 })
             } else {
                 let success = await request.json()
-               
+
             }
         } catch (error) {
             console.log(error)
@@ -242,7 +248,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         setCartID([])
         setCartData(null)
         try {
-            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
+            const request = await fetch(`${baseURL}/api/v1/cart`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -273,6 +279,63 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
     }
 
+    async function createCashOrder(shippingAddress: {}, token: string) {
+        console.log(shippingAddress)
+        console.log(token)
+        try {
+            const request = await fetch(`${baseURL}/api/v1/orders/${CartData?.cartId}?url=${domain || 'http://localhost:3000'}`,
+                // const request = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/66eb353b945e017d6e5bc177?url=http://localhost:3000`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': token,
+                    },
+                    body: JSON.stringify({
+                        shippingAddress: shippingAddress
+                    }),
+
+                    cache: 'no-store'
+                }
+            )
+
+            if (!request.ok) {
+                let error = await request.json()
+                setisErrorCart(error.message)
+                console.log(error.message)
+            }
+
+
+            const response = await request.json();
+            console.log(response)
+
+            // if (JSON.parse(success).message === 'success') {
+            //   console.log('save');
+            //   saveTokenHandel(success.token)
+            //   router.replace('/')
+            // }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+
+
+    // async function createCashOrder(cardId , shippingAddress) {
+    //     let res = await axios.post(`${baseURL}/api/v1/orders/checkout-session/${cardId}?url=http://localhost:3000`,
+    //     {
+    //         shippingAddress:shippingAddress
+    //     },
+    //     {
+    //         headers:gettoken
+    //     }).catch((errr)=>errr)
+    //     return res;
+    // }
+
+
 
     useEffect(() => {
         token && getCartHandel()
@@ -280,7 +343,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cartNum, loadingQuantity, totalPrice, CartData, cartproducts, ErrorCart, EmptyCart, AddToCartHandel, getCartHandel, UpdateCartProductQuantity, RemoveSpecificCartItem, clearCartHandel }}>
+        <CartContext.Provider value={{ cartNum, loadingQuantity, totalPrice, CartData, cartproducts, ErrorCart, EmptyCart, AddToCartHandel, getCartHandel, UpdateCartProductQuantity, RemoveSpecificCartItem, clearCartHandel, createCashOrder }}>
             {children}
         </CartContext.Provider>
     );
