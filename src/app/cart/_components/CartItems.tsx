@@ -95,7 +95,7 @@ export default function CartItems({ cartproducts, loadingQuantity, RemoveSpecifi
 
             <div>
               <p className="mt-4 mb-1 flex space-x-2 text-sm text-gray-700"><FaCheck className="text-xl text-green-500" /> <span>In stock</span></p>
-              <p>You are saving<span className="text-sm font-semibold text-green-500">20.00</span>upon purchase</p>
+              <p>You are saving<span className="text-sm font-semibold text-green-500"> $20.00 </span>upon purchase</p>
             </div>
 
           </div>

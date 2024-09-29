@@ -9,6 +9,7 @@ import FooterTop from './../components/component/Footer/FooterTop';
 import { TokenProvider } from "../context/SaveToken";
 import { Toaster } from "@/components/ui/toaster"
 import { CartProvider } from './../context/Cart';
+import { WishProvider } from './../context/wishlist';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,11 +27,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange >
           <TokenProvider>
             <CartProvider>
-              <Hadder />
-              {children}
-              <Toaster />
-              <FooterTop />
-              <Footer />
+              <WishProvider>
+                <Hadder />
+                {children}
+                <Toaster />
+                <FooterTop />
+                <Footer />
+              </WishProvider>
             </CartProvider>
           </TokenProvider>
         </ThemeProvider>

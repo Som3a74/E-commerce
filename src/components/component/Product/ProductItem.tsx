@@ -1,30 +1,23 @@
 "use client"
 import Image from "next/image"
-import { FaCartShopping } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { FaEye } from "react-icons/fa6";
 import { MdOutlineCompareArrows } from "react-icons/md";
-import { useCart } from "../../../context/Cart";
-import { ImSpinner2 } from "react-icons/im";
-import { useState } from "react";
 import Link from "next/link";
 import { TypeProductsDate } from '../../../types/type';
+import BtnAddToCart from "./BtnAddToCart";
+import { useWish } from "../../../context/wishlist";
+import { FaStar } from "react-icons/fa";
 
 type props = {
     ProductsData: TypeProductsDate
 }
 
 function ProductItem({ ProductsData }: props) {
-    const { AddToCartHandel } = useCart()
-    const [isLoading, setIsLoading] = useState(false);
 
-    const handleAddToCart = async (productId: string) => {
-        setIsLoading(true); // Set loading for this specific product
-        await AddToCartHandel(productId);
-        setIsLoading(false); // Stop loading once request is done
-    };
+    const { wishID ,  AddToWishHandel } = useWish()
 
+    const isWished = wishID.includes(ProductsData._id); // Check if the product is in the wishlist
 
     return (
         <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
@@ -63,20 +56,13 @@ function ProductItem({ ProductsData }: props) {
 
                 </div>
 
-                <button
-                    disabled={isLoading}
-                    onClick={() => handleAddToCart(ProductsData._id)}
-                    className="flex w-full items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    <FaCartShopping className="me-3 text-xl" />
-                    {isLoading ? <ImSpinner2 className='animate-spin mx-14' /> : 'Add to cart'}
-
-                </button>
+                <BtnAddToCart ProductID={ProductsData._id}/>
             </div>
 
             <div className="absolute top-1 -right-10 flex flex-col h-full group-hover:right-0 duration-300">
 
-                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    <CiStar />
+                <span onClick={()=> AddToWishHandel(ProductsData._id)} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                    {isWished ? <FaStar className="text-red-500" /> : <CiStar />}
                 </span>
 
                 <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">

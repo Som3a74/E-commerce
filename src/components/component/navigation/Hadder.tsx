@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useCart } from "../../../context/Cart";
+import { useWish } from "../../../context/wishlist";
 
 
 
@@ -39,6 +40,7 @@ export default function Header() {
 
     const { CartData , cartproducts, cartNum } = useCart()
 
+    const { wishNum, wishproducts } = useWish()
 
 
     const router = useRouter()
@@ -148,7 +150,7 @@ export default function Header() {
                             </Link>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
                                 <FiStar className="text-2xl" />
-                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{wishproducts && token ? wishNum : 0}</Badge>
                             </Link>
                             {/* <ModeToggle/> */}
                         </div>

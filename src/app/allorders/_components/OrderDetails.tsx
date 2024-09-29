@@ -18,7 +18,7 @@ export default function OrderDetails({ deCodedToken }: props) {
     const [brandsData, setbrandsData] = useState<TOrdersUser[] | []>([])
     console.log(brandsData)
 
-    async function getCartHandel() {
+    async function getOrderHandel() {
         try {
             let request = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/v1/orders/user/${deCodedToken.id}`);
 
@@ -38,7 +38,7 @@ export default function OrderDetails({ deCodedToken }: props) {
 
 
     useEffect(() => {
-        getCartHandel()
+        getOrderHandel()
     }, [])
 
 
