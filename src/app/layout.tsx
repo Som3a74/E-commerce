@@ -7,9 +7,9 @@ import Footer from '../components/component/Footer/Footer';
 import Hadder from '../components/component/navigation/Hadder';
 import FooterTop from './../components/component/Footer/FooterTop';
 import { TokenProvider } from "../context/SaveToken";
-import { Toaster } from "@/components/ui/toaster"
 import { CartProvider } from './../context/Cart';
 import { WishProvider } from './../context/wishlist';
+import { Toaster, toast } from 'sonner'
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <WishProvider>
                 <Hadder />
                 {children}
-                <Toaster />
+                <Toaster richColors duration={1500} />
                 <FooterTop />
                 <Footer />
               </WishProvider>

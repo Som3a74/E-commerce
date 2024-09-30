@@ -1,8 +1,8 @@
 "use client"
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { useToken } from './SaveToken';
-import { useToast } from '@/hooks/use-toast';
 import { TLoggedWish, TProduct } from './../types/WishType';
+import { toast } from 'sonner';
 
 interface wishlist {
     wishNum: number;
@@ -30,24 +30,17 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [wishData, setwishData] = useState<TLoggedWish | null>(null);
     const [ErrorWish, setisErrorWish] = useState<string | null>(null);
     const [EmptyWish, setisEmptyWish] = useState<boolean>(false);
-    const { toast } = useToast()
-    // console.log(wishID)
 
     async function AddToWishHandel(productId: string) {
-        if (!token) return toast({ duration: 1500, variant: "destructive", description: "please login first" })
+        if (!token) return toast.error('please login first')
 
         setisEmptyWish(false);
-        
+
         if (wishID.find(item => item === productId) === undefined) {
             setwishNum(e => e + 1)
             setwishID(ele => [...ele, productId])
         } else {
-            return toast({
-                duration: 1500,
-                variant: "default",
-                className: "bg-black text-white",
-                description: "Product Already in Favotite",
-            })
+            return toast.info('Product Already in Favotite')
         }
 
         try {
@@ -64,19 +57,10 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 setwishNum(e => e - 1)
                 let error = await request.json()
                 setisErrorWish(error.message)
-                toast({
-                    duration: 1500,
-                    variant: "destructive",
-                    description: error.message,
-                })
+                toast.error(error.message)
             } else {
                 let response = await request.json()
-                toast({
-                    duration: 1500,
-                    variant: "default",
-                    className: "bg-black text-white",
-                    description: 'Product added successfully to your Wish List',
-                })
+                toast.success('Product added successfully')
             }
         } catch (error) {
             console.log(error)
@@ -97,11 +81,7 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 let error = await request.json()
                 setisErrorWish(error.message)
                 console.log(error.message)
-                toast({
-                    duration: 1500,
-                    variant: "destructive",
-                    description: "please login first",
-                })
+                toast.error('please login first')
             }
             else {
                 let response: TLoggedWish = await request.json()
@@ -126,12 +106,7 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
         setwishNum(e => e - 1)
 
-        toast({
-            duration: 1500,
-            variant: "default",
-            className: "bg-black text-white",
-            description: "remove product success",
-        })
+        toast.success('remove product success')
 
         try {
             const request = await fetch(`${baseURL}/api/v1/wishlist/${productId}`, {
@@ -147,14 +122,9 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 let error = await request.json()
                 setisErrorWish(error.message)
                 console.log(error.message)
-                toast({
-                    duration: 1500,
-                    variant: "destructive",
-                    description: error.message,
-                })
+                toast.error(error.message)
             } else {
                 let success = await request.json()
-
             }
         } catch (error) {
             console.log(error)
