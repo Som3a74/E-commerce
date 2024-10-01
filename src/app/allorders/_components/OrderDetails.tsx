@@ -1,7 +1,8 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { TOrdersUser } from "../../../types/TOrders";
 import OrederItems from './OrederItems';
+import SpinnerLoading from './../../../components/component/SpinnerLoading';
 
 type props = {
     deCodedToken: {
@@ -18,7 +19,7 @@ export default function OrderDetails({ deCodedToken }: props) {
     const [brandsData, setbrandsData] = useState<TOrdersUser[] | []>([])
     console.log(brandsData)
 
-    async function getCartHandel() {
+    async function getOrderHandel() {
         try {
             let request = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/v1/orders/user/${deCodedToken.id}`);
 
@@ -37,13 +38,12 @@ export default function OrderDetails({ deCodedToken }: props) {
     }
 
 
-    useEffect(() => {
-        getCartHandel()
+    useLayoutEffect(() => {
+        getOrderHandel()
     }, [])
 
 
-
-    return brandsData && (
+    return brandsData.length !== 0 ? (
         <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold mt-1">Customer order details</h2>
             <p className="text-gray-600"> Customer Name : <span className="text-black font-semibold">{deCodedToken?.name}</span></p>
@@ -51,9 +51,10 @@ export default function OrderDetails({ deCodedToken }: props) {
             <p className="text-sm max-w-[600px] tracking-wide text-gray-500"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iste nostrum voluptate, accusantium cum officia aliquid? Laboriosam dolores neque est? </p>
 
 
-            {brandsData.map((item , index) => 
+            {brandsData.map((item, index) =>
                 <OrederItems index={index} order={item} />
             )}
         </div>
     )
+    :( <SpinnerLoading />)
 }

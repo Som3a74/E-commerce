@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation'
 export default function CartContainer() {
     const { getCartHandel, CartData, totalPrice, EmptyCart, cartNum, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
     const [isLoading, setIsLoading] = useState(false);
-    const { token } = useToken()
+    const { token , Storetoken} = useToken()
     const router = useRouter()
 
     // console.log(cartproducts.length)
@@ -26,46 +26,73 @@ export default function CartContainer() {
     }
 
     useEffect(() => {
-        if (token) {
-            getCartHandel()
-        }
+        Storetoken && getCartHandel()
+        
         // else {
         //     router.replace('/login')
         // }
     }, [])
 
-    return (
-        <>
-            {EmptyCart || cartNum === 0 ?
+    // return (
+    //     <>
+    //         {EmptyCart || cartNum === 0 ?
 
-                <CartEmpty />
+    //             <CartEmpty />
 
-                : <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+    //             : <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
 
-                    <section aria-labelledby="cart-heading" className="lg:col-span-7">
-                        <h2 id="cart-heading" className="sr-only"> Items in your shopping cart</h2>
-                        {CartData ?
-                            <>
-                                <CartItems loadingQuantity={loadingQuantity} RemoveSpecificCartItem={RemoveSpecificCartItem} UpdateCartProductQuantity={UpdateCartProductQuantity} cartproducts={cartproducts} />
-                                <Button
-                                    disabled={isLoading}
-                                    onClick={() => handleClearCart()}
-                                    className='px-10 py-5 mt-6'
-                                    variant="destructive"
-                                >
-                                    {isLoading ? <ImSpinner2 className='animate-spin mx-14' /> : 'Clear Cart'}
-                                </Button>
-                            </>
+    //                 <section aria-labelledby="cart-heading" className="lg:col-span-7">
+    //                     <h2 id="cart-heading" className="sr-only"> Items in your shopping cart</h2>
+    //                     {CartData ?
+    //                         <>
+    //                             <CartItems loadingQuantity={loadingQuantity} RemoveSpecificCartItem={RemoveSpecificCartItem} UpdateCartProductQuantity={UpdateCartProductQuantity} cartproducts={cartproducts} />
+    //                             <Button
+    //                                 disabled={isLoading}
+    //                                 onClick={() => handleClearCart()}
+    //                                 className='px-10 py-5 mt-6'
+    //                                 variant="destructive"
+    //                             >
+    //                                 {isLoading ? <ImSpinner2 className='animate-spin mx-14' /> : 'Clear Cart'}
+    //                             </Button>
+    //                         </>
 
-                            : <LoadingCartItems />}
-                    </section>
-
-
-                    {CartData ? <CheckoutCart totalPrice={totalPrice} CartData={CartData} /> : <LoadingCheckoutCart />}
-                </div>
+    //                         : <LoadingCartItems />}
+    //                 </section>
 
 
-            }
-        </>
-    )
+    //                 {CartData ? <CheckoutCart totalPrice={totalPrice} CartData={CartData} /> : <LoadingCheckoutCart />}
+    //             </div>
+
+
+    //         }
+    //     </>
+    // )
+console.log(CartData?.data?.products?.length);
+
+
+    return <>
+
+        {CartData ?
+            <>
+                {cartproducts.length !== 0 ?
+                    <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+
+                        <section aria-labelledby="cart-heading" className="lg:col-span-7">
+                            <h2 id="cart-heading" className="sr-only"> Items in your shopping cart</h2>
+                            <CartItems loadingQuantity={loadingQuantity} RemoveSpecificCartItem={RemoveSpecificCartItem} UpdateCartProductQuantity={UpdateCartProductQuantity} cartproducts={cartproducts} />
+                            <Button onClick={() => handleClearCart()} disabled={isLoading} className='px-10 py-5 mt-6' variant="destructive">
+                                {isLoading ? <ImSpinner2 className='animate-spin mx-14' /> : 'Clear Cart'}
+                            </Button>
+                        </section>
+
+                        {CartData ? <CheckoutCart totalPrice={totalPrice} CartData={CartData} /> : <LoadingCheckoutCart />}
+                    </div>
+
+                    : <CartEmpty />
+                }
+            </>
+            : EmptyCart ? <CartEmpty /> : <LoadingCartItems />
+        }
+
+    </>
 }

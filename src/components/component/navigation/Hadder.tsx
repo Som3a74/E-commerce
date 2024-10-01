@@ -15,11 +15,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useCart } from "../../../context/Cart";
+import { useWish } from "../../../context/wishlist";
+// import SearchInput from "../Search/SearchInput";
+import { AllProductsType, TypeProductsDate } from './../../../types/type';
+import ProductList from "../Product/ProductList";
 
 
 
 export default function Header() {
-    const { token, saveTokenHandel, getTokenHandel, clearTokenHandel } = useToken()
+    const { token, Storetoken, saveTokenHandel, getTokenHandel, clearTokenHandel } = useToken()
 
     // console.log(window.location.href);
     // const [PageUrl, setPageUrl] = useState(false)
@@ -37,9 +41,12 @@ export default function Header() {
     // console.log(location.href.includes('register') || location.href.includes('login'));
 
 
-    const { CartData , cartproducts, cartNum } = useCart()
+    const { CartData, cartproducts, cartNum } = useCart()
 
+    const { wishNum, wishproducts } = useWish()
 
+    const [filteredProducts, setFilteredProducts] = useState<TypeProductsDate[]>([]);
+    const [result, setresult] = useState<TypeProductsDate[]>([]);
 
     const router = useRouter()
     function LogOutHandel() {
@@ -47,11 +54,73 @@ export default function Header() {
         router.push('/')
     }
 
+
+    // document.body.onclick = function () {
+    //     setresult([])
+    // }
+    // const searchBar = document.getElementById('SearchBarEle');
+    // if (searchBar) {
+    //     searchBar.onclick = function () {
+    //         console.log('done');
+    //     };
+    // }
+
+    document.body.onclick = function (e) {
+        const searchBar = document.getElementById('SearchBarEle');
+        const EyesEle = document.getElementsByClassName('EyesEle');
+        const ImageEle = document.getElementsByClassName('ImageEle');
+
+        // Check if the click was outside of the SearchBarEle
+        if (!searchBar?.contains(e.target as HTMLElement)) {
+            // console.log(!searchBar?.contains(e.target as HTMLElement));
+            setresult([])
+        }
+        if (searchBar) {
+            for (let i = 0; i < EyesEle.length; i++) {
+                const elementEyes = EyesEle[i];
+                const elementImage = ImageEle[i];
+                if (elementEyes?.contains(e.target as HTMLElement) || elementImage?.contains(e.target as HTMLElement)) {
+                    searchBar.style.display = 'none'
+                }
+            }
+        }
+    };
+
+    async function GetproductsHandel() {
+        try {
+            const request = await fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
+                method: 'GET',
+            });
+            if (!request.ok) {
+                throw new Error('Failed to fetch categories')
+            }
+            else {
+                const ProductsData: AllProductsType = await request.json();
+                setFilteredProducts(ProductsData.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    function HandelSearch(text: string) {
+        if (text.length > 0) {
+            let result = filteredProducts.filter((ele) => ele.title.trim().toLowerCase().includes(text.trim().toLowerCase()))
+            setresult(result)
+        } else {
+            setresult([])
+        }
+    }
+
+    useEffect(() => {
+        GetproductsHandel()
+    }, [])
+
     return (
 
         <header className="sticky top-0 z-10 bg-lightUi">
-            <div className="mx-auto flex h-16 items-center gap-8 px-4 sm:px-6 md:px-10 lg:px-28 shadow-md">
 
+            <div className="mx-auto flex h-16 items-center gap-8 px-4 sm:px-6 md:px-10 lg:px-28 shadow-md">
                 <Link className="block text-teal-600" href="/">
                     <span className="sr-only">Home</span>
                     <svg className="h-6" viewBox="0 0 118 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,6 +175,8 @@ export default function Header() {
                             id="Search"
                             placeholder="Search for..."
                             className="w-full rounded-full  border-2 border-gray-300 0 p-2.5 pe-10 shadow-sm sm:text-sm"
+                            // onKeyUp={e => SearchText = (e.target as HTMLInputElement).value}
+                            onChange={e => HandelSearch((e.target as HTMLInputElement).value)}
                         />
 
                         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
@@ -144,11 +215,11 @@ export default function Header() {
                         <div className='flex items-center gap-4'>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
                                 <FiShoppingBag className="text-2xl" />
-                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{cartproducts && token ? cartNum : 0}</Badge>
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{cartproducts && Storetoken ? cartNum : 0}</Badge>
                             </Link>
                             <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
                                 <FiStar className="text-2xl" />
-                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">0</Badge>
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{wishproducts && Storetoken ? wishNum : 0}</Badge>
                             </Link>
                             {/* <ModeToggle/> */}
                         </div>
@@ -176,9 +247,13 @@ export default function Header() {
                         </Sheet>
 
                     </div>
+
                 </div>
             </div>
 
+            <div style={result.length === 0 ? { display: 'none' } : { display: 'block' }} id="SearchBarEle" className="absolute left-0 top-15 w-full mx-auto max-h-[500px] px-10 py-5 bg-white z-20 overflow-y-scroll text-black shadow-md shadow-sky-500 scrollbar-hide">
+                {result.length !== 0 && <ProductList ProductsData={result} />}
+            </div>
 
             <NavBar bottomNavigation={bottomNavigation} />
         </header >
