@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation'
 export default function CartContainer() {
     const { getCartHandel, CartData, totalPrice, EmptyCart, cartNum, loadingQuantity, RemoveSpecificCartItem, UpdateCartProductQuantity, cartproducts, clearCartHandel } = useCart()
     const [isLoading, setIsLoading] = useState(false);
-    const { token } = useToken()
+    const { token , Storetoken} = useToken()
     const router = useRouter()
 
     // console.log(cartproducts.length)
@@ -26,9 +26,8 @@ export default function CartContainer() {
     }
 
     useEffect(() => {
-        if (token) {
-            getCartHandel()
-        }
+        Storetoken && getCartHandel()
+        
         // else {
         //     router.replace('/login')
         // }
@@ -68,13 +67,14 @@ export default function CartContainer() {
     //         }
     //     </>
     // )
+console.log(CartData?.data?.products?.length);
 
 
     return <>
 
         {CartData ?
             <>
-                {CartData?.data?.products?.length !== 0 ?
+                {cartproducts.length !== 0 ?
                     <div className="mt-10 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
 
                         <section aria-labelledby="cart-heading" className="lg:col-span-7">

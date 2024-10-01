@@ -1,5 +1,5 @@
 "use client"
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { useToken } from './SaveToken';
 import { TLoggedWish, TProduct } from './../types/WishType';
 import { toast } from 'sonner';
@@ -23,7 +23,7 @@ const wishContext = createContext({} as wishlist);
 
 export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-    const { token } = useToken()
+    const { token , Storetoken} = useToken()
     const [wishNum, setwishNum] = useState<number>(0);
     const [wishID, setwishID] = useState<string[]>([]);
     const [wishproducts, setwishproducts] = useState<TProduct[] | []>([]);
@@ -32,7 +32,7 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [EmptyWish, setisEmptyWish] = useState<boolean>(false);
 
     async function AddToWishHandel(productId: string) {
-        if (!token) return toast.error('please login first')
+        if (!Storetoken) return toast.error('please login first')
 
         setisEmptyWish(false);
 
@@ -48,7 +48,7 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
                 body: JSON.stringify({ productId: productId }),
             });
@@ -73,9 +73,9 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
-                cache: 'no-store',
+                // cache: 'no-store',
             });
             if (!request.ok) {
                 let error = await request.json()
@@ -113,9 +113,8 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
-                cache: 'no-store',
             });
 
             if (!request.ok) {
@@ -132,10 +131,13 @@ export const WishProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
 
-    useEffect(() => {
-        token && getWishHandel()
-    }, [token])
+    // useEffect(() => {
+    //     token && getWishHandel()
+    // }, [token])
 
+    useLayoutEffect(() => {
+        Storetoken && getWishHandel()
+    }, [Storetoken])
 
     return (
         <wishContext.Provider value={{ wishNum, wishData, wishproducts, wishID, ErrorWish, EmptyWish, getWishHandel, AddToWishHandel, RemoveSpecificWishItem }}>

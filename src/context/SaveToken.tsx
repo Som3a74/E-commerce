@@ -1,5 +1,5 @@
 "use client"
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState, useLayoutEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from "universal-cookie";
 
@@ -27,10 +27,11 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
 
     const [token, settoken] = useState<string | null>(null);
     const [deCodedToken, setdeCodedToken] = useState<{} | null>(null);
+    const [Storetoken, setStoretoken] = useState<string | null>(cookies.get('userToken'));
 
-    console.log(token)
+    console.log(Storetoken)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (cookies.get('userToken')) {
             getTokenHandel();
             EnCodedTokenHandel();
@@ -51,6 +52,7 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
         cookies.set('userToken', userToken, { path: '/', expires: oneWeekFromNow });
 
         settoken(userToken)
+        setStoretoken(userToken)
         // decodeToken = jwtDecode(userToken);
     }
 
@@ -70,11 +72,12 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
     function clearTokenHandel() {
         cookies.remove('userToken', { path: '/' });
         settoken(null)
+        setStoretoken(null)
         // localStorage.removeItem('userToken')
     }
 
     return (
-        <TokenContext.Provider value={{ token, deCodedToken, saveTokenHandel, getTokenHandel, clearTokenHandel }}>
+        <TokenContext.Provider value={{ token, Storetoken, deCodedToken, saveTokenHandel, getTokenHandel, clearTokenHandel }}>
             {children}
         </TokenContext.Provider>
     );

@@ -1,5 +1,5 @@
 "use client"
-import { createContext, ReactNode, useContext, useEffect, useState, useOptimistic } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState, useOptimistic, useLayoutEffect } from 'react';
 import { useToken } from './SaveToken';
 import { TLoggedCart } from './../types/CartType';
 import { ProductElement } from './../types/CartType';
@@ -32,7 +32,7 @@ const CartContext = createContext({} as CartContextType);
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
-    const { token, getTokenHandel } = useToken()
+    const { token,Storetoken , getTokenHandel } = useToken()
     const [cartNum, setcartNum] = useState<number>(0);
     const [CartData, setCartData] = useState<TLoggedCart | null>(null);
     const [CartID, setCartID] = useState<(string)[]>([]);
@@ -63,7 +63,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
                 body: JSON.stringify({ productId: productId }),
             });
@@ -91,9 +91,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
-                cache: 'no-store',
+                // cache: 'no-store',
             });
             if (!request.ok) {
                 let error = await request.json()
@@ -152,10 +152,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
                 body: JSON.stringify({ count: productCount }),
-                cache: 'no-store',
+                // cache: 'no-store',
             });
 
             if (!request.ok) {
@@ -186,9 +186,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
-                cache: 'no-store',
+                // cache: 'no-store',
             });
 
             if (!request.ok) {
@@ -217,9 +217,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'token': token,
+                    'token': Storetoken,
                 },
-                cache: 'no-store',
+                // cache: 'no-store',
             });
 
             if (!request.ok) {
@@ -234,7 +234,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         }
     }
 
-    async function createCashOrder(shippingAddress: {}, token: string) {
+    async function createCashOrder(shippingAddress: {}, Storetoken: string) {
         console.log(shippingAddress)
         console.log(token)
         try {
@@ -244,7 +244,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'token': token,
+                        'token': Storetoken,
                     },
                     body: JSON.stringify({
                         shippingAddress: shippingAddress
@@ -277,9 +277,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 
 
-    useEffect(() => {
-        token && getCartHandel()
-    }, [token])
+    useLayoutEffect(() => {
+        Storetoken && getCartHandel()
+    }, [Storetoken])
 
 
     return (

@@ -98,3 +98,6 @@
     transform: rotate(1turn);
   }
 }
+.scrollbar-hide::-webkit-scrollbar{
+  display: none;
+}

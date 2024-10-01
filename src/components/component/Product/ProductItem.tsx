@@ -13,7 +13,7 @@ type props = {
     ProductsData: TypeProductsDate
 }
 
-function ProductItem({ ProductsData }: props) {
+export default function ProductItem({ ProductsData }: props) {
 
     const { wishID ,  AddToWishHandel } = useWish()
 
@@ -21,7 +21,7 @@ function ProductItem({ ProductsData }: props) {
 
     return (
         <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
-            <Link href={`/productDetails/${ProductsData._id}`} className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300">
+            <Link href={`/productDetails/${ProductsData._id}`} className="ImageEle relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300">
                 <Image
                     src={ProductsData.imageCover}
                     alt={ProductsData.title}
@@ -69,12 +69,10 @@ function ProductItem({ ProductsData }: props) {
                     <MdOutlineCompareArrows />
                 </span>
 
-                <Link href={`/productDetails/${ProductsData._id}`} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
+                <Link  href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
                     <FaEye />
                 </Link>
             </div>
         </div>
     )
 }
-
-export default ProductItem

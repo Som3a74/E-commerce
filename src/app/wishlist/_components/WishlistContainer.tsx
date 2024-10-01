@@ -9,12 +9,10 @@ import LoadingCartItems from './../../cart/_components/Loading/LoadingCartItems'
 export default function WishlistContainer() {
 
   const { wishNum, wishData, wishproducts, RemoveSpecificWishItem, ErrorWish, EmptyWish, getWishHandel } = useWish()
-  const { token } = useToken()
+  const { token , Storetoken } = useToken()
 
   useEffect(() => {
-    if (token) {
-      getWishHandel()
-    }
+     Storetoken && getWishHandel()
   }, [])
 
 
@@ -26,7 +24,7 @@ export default function WishlistContainer() {
 
         <div className="-my-6 divide-y divide-gray-200 sm:-my-10">
 
-          {wishproducts?.length !== 0 ?
+          {wishproducts?.length !== 0 || wishNum !== 0 ?
             <>
               {wishproducts?.map((product) =>
                 <WishlistItem key={product?._id} product={product} RemoveSpecificWishItem={RemoveSpecificWishItem} />
