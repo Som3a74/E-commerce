@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { incentives } from '../../../utility/FooterTopData'
 
 export default function FooterTop() {
@@ -20,9 +21,11 @@ export default function FooterTop() {
                             >
                                 <div className=" sm:flex-shrink-0">
                                     <div className="flex-root">
-                                        <img
+                                        <Image
                                             src={item?.imageSrc}
                                             alt="image"
+                                            width={100}
+                                            height={100}
                                             className="mx-auto h-16 w-16"
                                         />
                                     </div>

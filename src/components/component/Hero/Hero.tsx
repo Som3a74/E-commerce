@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import homeBanner from '../../../assets/Hero/homeBanner.jpg';
+import homeBanner from '../../../assets/Hero/homeBanner.webp';
 import { Button } from '@/components/ui/button';
 import { HeroData } from '../../../utility/HeroData'
 

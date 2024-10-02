@@ -7,7 +7,7 @@ import brandOne from "../../assets/brands/brandOne.webp";
 import brandSix from "../../assets/brands/brandSix.webp";
 import brandThree from "../../assets/brands/brandThree.webp";
 import brandTwo from "../../assets/brands/brandTwo.webp";
-import discountImgOne from "../../assets/brands/discountImgOne.png";
+import discountImgOne from "../../assets/brands/discountImgOne.webp";
 import discountImgTwo from "../../assets/brands/discountImgTwo.webp";
 
 export default function DiscountedBanner() {

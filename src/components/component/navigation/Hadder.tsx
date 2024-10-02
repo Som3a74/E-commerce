@@ -65,26 +65,7 @@ export default function Header() {
     //     };
     // }
 
-    document.body.onclick = function (e) {
-        const searchBar = document.getElementById('SearchBarEle');
-        const EyesEle = document.getElementsByClassName('EyesEle');
-        const ImageEle = document.getElementsByClassName('ImageEle');
 
-        // Check if the click was outside of the SearchBarEle
-        if (!searchBar?.contains(e.target as HTMLElement)) {
-            // console.log(!searchBar?.contains(e.target as HTMLElement));
-            setresult([])
-        }
-        if (searchBar) {
-            for (let i = 0; i < EyesEle.length; i++) {
-                const elementEyes = EyesEle[i];
-                const elementImage = ImageEle[i];
-                if (elementEyes?.contains(e.target as HTMLElement) || elementImage?.contains(e.target as HTMLElement)) {
-                    searchBar.style.display = 'none'
-                }
-            }
-        }
-    };
 
     async function GetproductsHandel() {
         try {
@@ -114,6 +95,26 @@ export default function Header() {
 
     useEffect(() => {
         GetproductsHandel()
+        document.body.onclick = function (e) {
+            const searchBar = document.getElementById('SearchBarEle');
+            const EyesEle = document.getElementsByClassName('EyesEle');
+            const ImageEle = document.getElementsByClassName('ImageEle');
+
+            // Check if the click was outside of the SearchBarEle
+            if (!searchBar?.contains(e.target as HTMLElement)) {
+                // console.log(!searchBar?.contains(e.target as HTMLElement));
+                setresult([])
+            }
+            if (searchBar) {
+                for (let i = 0; i < EyesEle.length; i++) {
+                    const elementEyes = EyesEle[i];
+                    const elementImage = ImageEle[i];
+                    if (elementEyes?.contains(e.target as HTMLElement) || elementImage?.contains(e.target as HTMLElement)) {
+                        searchBar.style.display = 'none'
+                    }
+                }
+            }
+        };
     }, [])
 
     return (

@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 
 export default function middleware(req) {
-  // console.log(req.url)
   let verify = req.cookies.get("userToken");
-  console.log(verify)
   let url = req.url
   
   // console.log(!verify === false)
