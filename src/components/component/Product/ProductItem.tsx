@@ -34,15 +34,15 @@ export default function ProductItem({ ProductsData }: props) {
             <div className="mt-4 px-5 pb-5">
 
                 <div>
-                    <h3 className="text-sm font-extrabold text-darkUi line-clamp-1 mb-2">{ProductsData.title}</h3>
-                    <h5 className="text-md font-bold tracking-tight text-grayUI2 line-clamp-2">{ProductsData.description}</h5>
+                    <h3 className="text-sm font-extrabold text-DarkBeLight line-clamp-1 mb-2">{ProductsData.title}</h3>
+                    <h5 className="text-md font-bold tracking-tight text-GrayBeLight line-clamp-2">{ProductsData.description}</h5>
                 </div>
 
                 <div className="mt-2 mb-5 flex items-center justify-between flex-wrap">
 
                     <p>
-                        <span className="text-3xl font-bold text-darkUi">${ProductsData.price}</span>
-                        <span className="text-sm text-darkUi line-through">${ProductsData.price + 100}</span>
+                        <span className="text-3xl font-bold text-DarkBeLight">${ProductsData.price}</span>
+                        <span className="text-sm text-DarkBeLight line-through">${ProductsData.price + 100}</span>
                     </p>
 
                     <div className="flex items-center">
@@ -51,7 +51,7 @@ export default function ProductItem({ ProductsData }: props) {
                         <FaStar className="h-5 w-5 text-yellow-300" />
                         <FaStar className="h-5 w-5 text-yellow-300" />
                         <FaStar className="h-5 w-5 text-yellow-300" />
-                        <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">{ProductsData.ratingsAverage}</span>
+                        <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold text-LightBeDark">{ProductsData.ratingsAverage}</span>
                     </div>
 
                 </div>
@@ -62,15 +62,15 @@ export default function ProductItem({ ProductsData }: props) {
             <div className="absolute top-1 -right-10 flex flex-col h-full group-hover:right-0 duration-300">
 
                 <span onClick={()=> AddToWishHandel(ProductsData._id)} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    {isWished ? <FaStar className="text-red-500" /> : <CiStar />}
+                    {isWished ? <FaStar className="text-red-500" /> : <CiStar className="text-DarkBeLight" />}
                 </span>
 
                 <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    <MdOutlineCompareArrows />
+                    <MdOutlineCompareArrows className="text-DarkBeLight" />
                 </span>
 
                 <Link  href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    <FaEye />
+                    <FaEye className="text-DarkBeLight" />
                 </Link>
             </div>
         </div>

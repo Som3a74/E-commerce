@@ -59,7 +59,7 @@ export default function FiltersItem({ category, priceGteValue, priceLteValue, se
         <button
             onClick={() => handleSearch(category._id)}
             key={category._id}
-            className="font-semibold text-md block text-grayUI2 p-1 cursor-pointer hover:underline hover:text-darkUi transition duration-300 ease-linear"
+            className="font-semibold text-md block text-grayUI2 p-1 cursor-pointer hover:underline hover:text-darkUi dark:hover:text-white transition duration-300 ease-linear"
         >
             {category.name}
         </button>

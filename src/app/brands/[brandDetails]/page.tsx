@@ -16,7 +16,7 @@ export default async function page({ params }: props) {
   const brandsData: BrandSpecificType = await request.json();
 
   return (
-    <main className='py-10 bg-gray-100 h-[82vh]'>
+    <main className='py-10 bg-gray-100 dark:bg-darkAll h-[82vh]'>
       <h1 className='font-bold text-4xl mb-24 text-center underline'>Brand Details</h1>
       <div className='container px-10 sm:px-24 mx-auto'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center items-center'>

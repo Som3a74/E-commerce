@@ -11,7 +11,7 @@ export default async function PopularCategories() {
     const CategoryData: TypeAllCategories = await request.json();
     return (
         <section>
-            <SectionHadder linkText='View All Categories' text='Popular categories' link='/' />
+            <SectionHadder linkText='View All Categories' text='Popular categories' link='/' show={true}/>
 
             <div className='mx-auto py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8'>
                 {CategoryData.data.map((ele) => (
@@ -22,7 +22,7 @@ export default async function PopularCategories() {
                             fill
                             className="object-cover object-top rounded-md h-auto group-hover:scale-110 duration-300"
                         />
-                        <span className="absolute bottom-0 pt-3 text-darkUi bg-grayUI100 w-full text-center text-sm md:text-base font-bold">{ele.name}</span>
+                        <span className="absolute bottom-0 pt-3 text-DarkBeLight bg-grayUI100 w-full text-center text-sm md:text-base font-bold">{ele.name}</span>
                     </Link>
                 ))}
             </div>

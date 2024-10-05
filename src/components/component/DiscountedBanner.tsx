@@ -51,7 +51,7 @@ export default function DiscountedBanner() {
                 />
                 <div className="flex flex-col flex-1 gap-1 items-center">
                     <div className="flex items-center justify-center gap-x-3 text-xl md:text-4xl font-bold">
-                        <h2>Sony Headphone</h2>
+                        <h2 className="text-LightBeDark">Sony Headphone</h2>
                         <Link
                             href={`/product/productFilters?categoryId=6439d2d167d9aa4ca970649f`}
                             className="border border-red-600 px-4 py-2 text-sm md:text-3xl text-red-600 rounded-full"

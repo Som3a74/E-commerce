@@ -7,7 +7,7 @@ export default function page() {
 
       <div className="border-b border-b-gray-300 pb-6">
 
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Favorite Products</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-DarkBeLight sm:text-3xl">Favorite Products</h1>
         <p className="mt-2 text-sm text-gray-500 max-w-[600px]">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias laboriosam sapiente eaque nisi doloribus aliquid perspiciatis error rerum adipisci veritatis, quae cupiditate deserunt ex explicabo quis velit rem asperiores minus.
         </p>

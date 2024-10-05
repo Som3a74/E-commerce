@@ -15,7 +15,7 @@ export default function OrederItems({ order, index }: props) {
             <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
 
-                    <AccordionTrigger className="text-base font-semibold leading-7 text-gray-900">Order Number:{" "} {index + 1} </AccordionTrigger>
+                    <AccordionTrigger className="text-base font-semibold leading-7 text-DarkBeLight">Order Number:{" "} {index + 1} </AccordionTrigger>
 
 
                     <AccordionContent className="mt-5 pr-12">

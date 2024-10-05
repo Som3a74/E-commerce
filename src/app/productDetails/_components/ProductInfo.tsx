@@ -30,7 +30,7 @@ export default function ProductInfo({ productData }: any) {
           <FaStar className="h-5 w-5 text-yellow-300 hidden sm:inline-block" />
           <FaStar className="h-5 w-5 text-yellow-300 hidden sm:inline-block" />
           <FaStar className="h-5 w-5 text-yellow-300 hidden sm:inline-block" />
-          <span className="ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">{productData.ratingsAverage} ({productData.ratingsQuantity} reviews)</span>
+          <span className="ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs text-darkAll font-semibold">{productData.ratingsAverage} ({productData.ratingsQuantity} reviews)</span>
         </div>
 
       </div>
