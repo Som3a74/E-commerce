@@ -1,7 +1,6 @@
 import { FaStar } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
 import ProductCount from "./ProductCount";
-import { Button } from "@/components/ui/button"
 
 export default function ProductInfo({ productData }: any) {
 
@@ -44,8 +43,6 @@ export default function ProductInfo({ productData }: any) {
 
       <h5 className="text-sm">Brand : <span className="font-bold text-base">{productData.brand.name}</span></h5>
       <h5 className="text-sm">Category : <span className="font-bold text-base">{productData.category.name}</span></h5>
-
-      {/* <Button onClick={() => AddToCart(productData._id)} className="w-full mt-6 py-6 rounded-full">Buy now</Button> */}
 
       <ProductCount producId={productData._id}  />
     </div>

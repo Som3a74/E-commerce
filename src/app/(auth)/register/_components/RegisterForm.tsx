@@ -18,7 +18,7 @@ export default function RegisterForm() {
     const [isLoading, setLoading] = useState(false)
     const [isError, setisError] = useState<null | string>(null)
 
-    const { token , saveTokenHandel , getTokenHandel , clearTokenHandel } = useToken()
+    const { token , saveTokenHandel } = useToken()
     console.log(token)
 
     const { register, handleSubmit, formState: { errors }, getFieldState, trigger, setError, } = useForm<TFormInput>({
@@ -29,7 +29,6 @@ export default function RegisterForm() {
     const emailOnBlurHandel = async (e: React.FocusEvent<HTMLInputElement>) => {
         await trigger('email')
         const { isDirty, invalid } = getFieldState('email')
-        // console.log(isDirty, !invalid)
         if (isDirty && !invalid) {
             // console.log(e);
         }
@@ -70,10 +69,6 @@ export default function RegisterForm() {
         }
         setLoading(false)
     }
-
-
-    // if (isLoading) return <p>Loading...</p>
-    // if (!data) return <p>No profile data</p>
 
     return (
         <form onSubmit={handleSubmit(SubmitForm)} className="mt-8 grid grid-cols-6 gap-6">

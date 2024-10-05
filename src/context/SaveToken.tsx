@@ -29,7 +29,7 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
     const [deCodedToken, setdeCodedToken] = useState<{} | null>(null);
     const [Storetoken, setStoretoken] = useState<string | null>(cookies.get('userToken'));
 
-    console.log(Storetoken)
+    // console.log(Storetoken)
 
     useLayoutEffect(() => {
         if (cookies.get('userToken')) {
@@ -37,13 +37,6 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
             EnCodedTokenHandel();
         }
     }, []);
-
-
-    // useEffect(() => {
-    //     EnCodedTokenHandel();
-    // }, []);
-
-
 
     function saveTokenHandel(userToken: string) {
         // Set cookie to expire in 7 days (1 week)
@@ -86,9 +79,3 @@ export const TokenProvider: React.FC<TokenProviderProps> = ({ children }) => {
 export function useToken() {
     return useContext(TokenContext);
 }
-
-
-// export const useToken = () => {
-//     const context = useContext(TokenContext);
-//     return context;
-// }

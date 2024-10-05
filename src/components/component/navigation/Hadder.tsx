@@ -16,32 +16,15 @@ import { useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useCart } from "../../../context/Cart";
 import { useWish } from "../../../context/wishlist";
-// import SearchInput from "../Search/SearchInput";
 import { AllProductsType, TypeProductsDate } from './../../../types/type';
 import ProductList from "../Product/ProductList";
 
 
 
 export default function Header() {
-    const { token, Storetoken, saveTokenHandel, getTokenHandel, clearTokenHandel } = useToken()
+    const { token, Storetoken , clearTokenHandel } = useToken()
 
-    // console.log(window.location.href);
-    // const [PageUrl, setPageUrl] = useState(false)
-    // useEffect(() => {
-    //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
-
-    //     return () => {
-    //         setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
-    //     }
-    // }, [window.location.href])
-
-    // useEffect(() => {
-    //     setPageUrl(window.location.href.toString().includes('register') || window.location.href.toString().includes('login'))
-    // }, [])
-    // console.log(location.href.includes('register') || location.href.includes('login'));
-
-
-    const { CartData, cartproducts, cartNum } = useCart()
+    const {cartproducts, cartNum } = useCart()
 
     const { wishNum, wishproducts } = useWish()
 
@@ -53,19 +36,6 @@ export default function Header() {
         clearTokenHandel()
         router.push('/')
     }
-
-
-    // document.body.onclick = function () {
-    //     setresult([])
-    // }
-    // const searchBar = document.getElementById('SearchBarEle');
-    // if (searchBar) {
-    //     searchBar.onclick = function () {
-    //         console.log('done');
-    //     };
-    // }
-
-
 
     async function GetproductsHandel() {
         try {
@@ -102,7 +72,6 @@ export default function Header() {
 
             // Check if the click was outside of the SearchBarEle
             if (!searchBar?.contains(e.target as HTMLElement)) {
-                // console.log(!searchBar?.contains(e.target as HTMLElement));
                 setresult([])
             }
             if (searchBar) {
@@ -176,8 +145,7 @@ export default function Header() {
                             id="Search"
                             placeholder="Search for..."
                             className="w-full rounded-full  border-2 border-gray-300 0 p-2.5 pe-10 shadow-sm sm:text-sm"
-                            // onKeyUp={e => SearchText = (e.target as HTMLInputElement).value}
-                            onChange={e => HandelSearch((e.target as HTMLInputElement).value)}
+                            onKeyUp={e => HandelSearch((e.target as HTMLInputElement).value)}
                         />
 
                         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
@@ -190,10 +158,6 @@ export default function Header() {
                     <div className="flex items-center gap-4">
 
                         <div className="flex">
-                            {/* <Button className="">sign</Button> */}
-                            {/* {!token &&
-                                
-                            } */}
                             <DropdownMenu>
 
                                 <DropdownMenuTrigger><FiUser className="font-bold text-2xl block" /></DropdownMenuTrigger>

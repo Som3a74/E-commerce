@@ -1,5 +1,4 @@
 'use client'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ImSpinner2 } from "react-icons/im";
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -36,7 +35,6 @@ export default function page() {
     console.log(token)
     console.log(CartData?.cartId)
     try {
-      // const request = await fetch(`${baseURL}/api/v1/orders/${CartData?.cartId}?url=${domain || 'http://localhost:3000'}`,
       const request = await fetch(`${baseURL}/api/v1/orders/checkout-session/${CartData?.cartId}?url=${domain || 'http://localhost:3000'}`,
         {
           method: 'POST',
@@ -68,15 +66,8 @@ export default function page() {
         window.location.href =`${response.session.url}`
       }
 
-      // if (JSON.parse(success).message === 'success') {
-      //   console.log('save');
-      //   saveTokenHandel(success.token)
-      //   router.replace('/')
-      // }
-
     } catch (error) {
       console.log(error)
-      // console.log(JSON.parse(error.text()))
     }
     setLoading(false)
   }

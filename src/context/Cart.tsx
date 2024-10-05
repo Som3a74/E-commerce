@@ -42,14 +42,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [EmptyCart, setisEmptyCart] = useState<boolean>(false);
     const [loadingQuantity, setisloadingQuantity] = useState<boolean>(false);
 
-    // console.log(token)
-    // console.log(cartproducts)
-
-    // useEffect(() => {
-    //     getTokenHandel()
-    // }, [])
-
-
     async function AddToCartHandel(productId: string) {
         setisEmptyCart(false);
 
@@ -167,6 +159,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             }
         } catch (error) {
             console.log(error)
+            throw new Error('Error Updat eCartProduct Quantity')
         }
         setisloadingQuantity(false)
     }
@@ -235,11 +228,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
 
     async function createCashOrder(shippingAddress: {}, Storetoken: string) {
-        console.log(shippingAddress)
-        console.log(token)
+        // console.log(shippingAddress)
+        // console.log(token)
         try {
             const request = await fetch(`${baseURL}/api/v1/orders/${CartData?.cartId}?url=${domain || 'http://localhost:3000'}`,
-                // const request = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/66eb353b945e017d6e5bc177?url=http://localhost:3000`,
                 {
                     method: 'POST',
                     headers: {
@@ -249,7 +241,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
                     body: JSON.stringify({
                         shippingAddress: shippingAddress
                     }),
-
                     cache: 'no-store'
                 }
             )
@@ -262,14 +253,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
 
             const response = await request.json();
-            console.log(response)
-
-            // if (JSON.parse(success).message === 'success') {
-            //   console.log('save');
-            //   saveTokenHandel(success.token)
-            //   router.replace('/')
-            // }
-
+            // console.log(response)
+          
         } catch (error) {
             console.log(error)
         }

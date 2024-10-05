@@ -1,12 +1,11 @@
 "use client"
-import { useEffect, useState } from 'react';
 import { useToken } from '../../../context/SaveToken';
 import NoOrders from './NoOrders';
 import OrderDetails from './OrderDetails';
 
 export default function OrderContainer() {
 
-  const { token, Storetoken , deCodedToken } = useToken()
+  const { deCodedToken } = useToken()
   console.log(deCodedToken)
 
   

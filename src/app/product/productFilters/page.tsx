@@ -9,7 +9,6 @@ type props = {
 }
 
 export default function page({ searchParams }: props) {
-  // console.log(searchParams.categoryId)
 
   return (
     <div>

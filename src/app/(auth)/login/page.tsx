@@ -57,7 +57,6 @@ export default function page() {
 
     } catch (error) {
       console.log(error)
-      // console.log(JSON.parse(error.text()))
     }
     setLoading(false)
   }

@@ -1,7 +1,7 @@
 "use client"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from "@/components/ui/carousel"
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import Autoplay from "embla-carousel-autoplay"
 import Image from 'next/image'
 import { TypeCategoriesData } from "@/types/categoriesType"
@@ -12,7 +12,6 @@ interface props {
 }
 
 export default function SliderCategory({ CategoryData }: props) {
-    // console.log(CategoryData)
     const plugin = useRef(
         Autoplay({ delay: 2000, stopOnInteraction: true })
     )

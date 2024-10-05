@@ -9,7 +9,7 @@ import LoadingCartItems from './../../cart/_components/Loading/LoadingCartItems'
 export default function WishlistContainer() {
 
   const { wishNum, wishData, wishproducts, RemoveSpecificWishItem, ErrorWish, EmptyWish, getWishHandel } = useWish()
-  const { token , Storetoken } = useToken()
+  const { Storetoken } = useToken()
 
   useEffect(() => {
      Storetoken && getWishHandel()
