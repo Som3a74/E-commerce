@@ -4,7 +4,7 @@ import RegisterImg from './_components/registerImg'
 export default function page() {
 
   return (
-    <main className="bg-white mb-10 lg:mb-0">
+    <main className="mb-10 lg:mb-0">
       <div className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-12 gap-4 justify-items-center">
 
         <RegisterImg />

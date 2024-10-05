@@ -54,6 +54,21 @@ const config = {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
+  			LightAll: {
+  				DEFAULT: 'var(--LightAll)'
+  			},
+  			darkAll: {
+  				DEFAULT: 'var(--darkAll)'
+  			},
+  			LightBeDark: {
+  				DEFAULT: 'var(--LightBeDark)'
+  			},
+  			DarkBeLight: {
+  				DEFAULT: 'var(--DarkBeLight)'
+  			},
+  			GrayBeLight: {
+  				DEFAULT: 'var(--GrayBeLight)'
+  			},
   			lightUi: {
   				DEFAULT: 'var(--lightUi)'
   			},

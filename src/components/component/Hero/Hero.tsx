@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import homeBanner from '../../../assets/Hero/homeBanner.jpg';
+import homeBanner from '../../../assets/Hero/homeBanner.webp';
 import { Button } from '@/components/ui/button';
 import { HeroData } from '../../../utility/HeroData'
 
@@ -7,7 +7,7 @@ export default function Hero() {
     return (
         <section>
 
-            <div className='relative mb-14'>
+            {/* <div className='relative mb-14'>
                 <Image
                     src={homeBanner}
                     width={1250}
@@ -24,12 +24,12 @@ export default function Hero() {
                         The new tech gift you are <br /> wishing for right here.
                     </p>
 
-                    <Button className='rounded-full bg-lightUi text-xs text-darkUi p-3 md:p-6 md:font-bold hover:bg-darkUi hover:text-lightUi'>
+                    <Button className='rounded-full bg-LightBeDark text-xs text-DarkBeLight p-3 md:p-6 md:font-bold hover:bg-darkUi hover:text-lightUi'>
                         Start Shopping
                     </Button>
                 </div>
 
-            </div>
+            </div> */}
 
 
 

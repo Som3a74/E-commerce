@@ -23,7 +23,7 @@ export default function SliderCategory({ CategoryData }: props) {
                 <CarouselContent className="-ml-1 ">
                     {CategoryData.map((ele) => (
                         <CarouselItem key={ele._id} className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 hover:shadow-sm ">
-                            <Card className="cursor-pointer hover:border-blue-500 hover:bg-slate-50">
+                            <Card className="cursor-pointer hover:border-blue-500 hover:bg-slate-50 hover:text-darkAll">
                                 <Link className="flex items-center justify-evenly p-1" href={`/product/productFilters?categoryId=${ele._id}`}>
                                     <Image
                                         src={ele.image}

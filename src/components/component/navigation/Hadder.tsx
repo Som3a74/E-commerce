@@ -65,26 +65,7 @@ export default function Header() {
     //     };
     // }
 
-    document.body.onclick = function (e) {
-        const searchBar = document.getElementById('SearchBarEle');
-        const EyesEle = document.getElementsByClassName('EyesEle');
-        const ImageEle = document.getElementsByClassName('ImageEle');
 
-        // Check if the click was outside of the SearchBarEle
-        if (!searchBar?.contains(e.target as HTMLElement)) {
-            // console.log(!searchBar?.contains(e.target as HTMLElement));
-            setresult([])
-        }
-        if (searchBar) {
-            for (let i = 0; i < EyesEle.length; i++) {
-                const elementEyes = EyesEle[i];
-                const elementImage = ImageEle[i];
-                if (elementEyes?.contains(e.target as HTMLElement) || elementImage?.contains(e.target as HTMLElement)) {
-                    searchBar.style.display = 'none'
-                }
-            }
-        }
-    };
 
     async function GetproductsHandel() {
         try {
@@ -114,6 +95,26 @@ export default function Header() {
 
     useEffect(() => {
         GetproductsHandel()
+        document.body.onclick = function (e) {
+            const searchBar = document.getElementById('SearchBarEle');
+            const EyesEle = document.getElementsByClassName('EyesEle');
+            const ImageEle = document.getElementsByClassName('ImageEle');
+
+            // Check if the click was outside of the SearchBarEle
+            if (!searchBar?.contains(e.target as HTMLElement)) {
+                // console.log(!searchBar?.contains(e.target as HTMLElement));
+                setresult([])
+            }
+            if (searchBar) {
+                for (let i = 0; i < EyesEle.length; i++) {
+                    const elementEyes = EyesEle[i];
+                    const elementImage = ImageEle[i];
+                    if (elementEyes?.contains(e.target as HTMLElement) || elementImage?.contains(e.target as HTMLElement)) {
+                        searchBar.style.display = 'none'
+                    }
+                }
+            }
+        };
     }, [])
 
     return (
@@ -221,12 +222,12 @@ export default function Header() {
                                 <FiStar className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{wishproducts && Storetoken ? wishNum : 0}</Badge>
                             </Link>
-                            {/* <ModeToggle/> */}
+                            <ModeToggle/>
                         </div>
 
                         {/* mobile NavBar */}
                         <Sheet>
-                            <SheetTrigger asChild className="rounded md:hidden hover:text-gray-700 p-1 bg-slate-100">
+                            <SheetTrigger asChild className="rounded md:hidden hover:text-gray-700 p-1  dark:bg-black">
                                 <IoMenu className="size-10 bg-gray cursor-pointer" />
                             </SheetTrigger>
                             <SheetContent className="py-32">
@@ -251,7 +252,7 @@ export default function Header() {
                 </div>
             </div>
 
-            <div style={result.length === 0 ? { display: 'none' } : { display: 'block' }} id="SearchBarEle" className="absolute left-0 top-15 w-full mx-auto max-h-[500px] px-10 py-5 bg-white z-20 overflow-y-scroll text-black shadow-md shadow-sky-500 scrollbar-hide">
+            <div style={result.length === 0 ? { display: 'none' } : { display: 'block' }} id="SearchBarEle" className="absolute left-0 top-15 w-full mx-auto max-h-[500px] px-10 py-5 bg-LightBeDark z-20 overflow-y-scroll text-black shadow-md shadow-sky-500 scrollbar-hide">
                 {result.length !== 0 && <ProductList ProductsData={result} />}
             </div>
 

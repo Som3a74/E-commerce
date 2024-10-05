@@ -18,7 +18,7 @@ export default function WishlistItem({ product, RemoveSpecificWishItem }: props)
         <div className="lg:flex-1">
           <div className="sm:flex justify-between">
             <div>
-              <h4 className="font-medium text-gray-900">{product?.title}</h4>
+              <h4 className="font-medium text-DarkBeLight">{product?.title}</h4>
               <p className="mt-2 hidden text-sm text-gray-500 sm:block">
                 {product?.description}
               </p>

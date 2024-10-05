@@ -45,9 +45,9 @@ export default function OrderDetails({ deCodedToken }: props) {
 
     return brandsData.length !== 0 ? (
         <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold mt-1">Customer order details</h2>
-            <p className="text-gray-600"> Customer Name : <span className="text-black font-semibold">{deCodedToken?.name}</span></p>
-            <p className="text-gray-600">Total Orders :  <span className="text-black font-semibold">{brandsData?.length}</span></p>
+            <h2 className="text-2xl font-bold mt-1 text-DarkBeLight">Customer order details</h2>
+            <p className="text-GrayBeLight"> Customer Name : <span className="text-DarkBeLight font-semibold">{deCodedToken?.name}</span></p>
+            <p className="text-GrayBeLight">Total Orders :  <span className="text-DarkBeLight font-semibold">{brandsData?.length}</span></p>
             <p className="text-sm max-w-[600px] tracking-wide text-gray-500"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem iste nostrum voluptate, accusantium cum officia aliquid? Laboriosam dolores neque est? </p>
 
 
