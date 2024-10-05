@@ -7,7 +7,7 @@ export default function Hero() {
     return (
         <section>
 
-            <div className='relative mb-14'>
+            {/* <div className='relative mb-14'>
                 <Image
                     src={homeBanner}
                     width={1250}
@@ -29,7 +29,7 @@ export default function Hero() {
                     </Button>
                 </div>
 
-            </div>
+            </div> */}
 
 
 
