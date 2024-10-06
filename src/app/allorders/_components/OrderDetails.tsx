@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { TOrdersUser } from "../../../types/TOrders";
 import OrederItems from './OrederItems';
 import SpinnerLoading from './../../../components/component/SpinnerLoading';

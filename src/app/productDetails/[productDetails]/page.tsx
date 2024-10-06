@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductContainer from '../_components/ProductContainer'
 
 interface props {
@@ -6,7 +5,6 @@ interface props {
 }
 
 export default function page({ params }: props) {
-  // console.log(params.productDetails)
   return (
     <main>
       <ProductContainer productId={params.productDetails} />

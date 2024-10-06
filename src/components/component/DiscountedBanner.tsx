@@ -19,13 +19,7 @@ export default function DiscountedBanner() {
     return (
 
         <section>
-
-
-
             <SectionHadder linkText='View All Categories' text='Popular Search' link='/' show={false} />
-
-
-
 
             <div className="my-7 flex items-center flex-wrap gap-4">
                 {popularSearchItems?.map(({ title, link }) => (
@@ -38,7 +32,6 @@ export default function DiscountedBanner() {
                     </Link>
                 ))}
             </div>
-
 
 
             <div className="w-full py-5 md:py-0 my-12 bg-[#f6f6f6] rounded-lg flex items-center justify-between overflow-hidden">
@@ -133,6 +126,5 @@ export default function DiscountedBanner() {
                 </div>
             </div>
         </section>
-
     );
 };

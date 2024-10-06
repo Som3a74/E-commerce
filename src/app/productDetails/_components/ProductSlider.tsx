@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { DataSpecificType } from '../../../types/SpecificProductType';
 
 interface props {
@@ -24,7 +24,6 @@ export default function ProductSlider({ productData }: props) {
             height={100}
             className={`w-24 cursor-pointer opacity-70 hover:opacity-100 duration-300 ${BigImage == url && ` border border-gray-500 rounded-sm opacity-100 scale-105`}` }
             onClick={(() => setBigImage(url))}
-          // className="w-24 h-24 cursor-pointer opacity-80 hover:opacity-100 duration-300 border border-gray-500 rounded-sm"
           />
         )}
       </div>

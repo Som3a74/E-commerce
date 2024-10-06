@@ -60,7 +60,6 @@ export default function CartItems({ cartproducts, loadingQuantity, RemoveSpecifi
 
                     <button
                       disabled={ele.count <= 1 || loadingQuantity}
-                      // disabled={ele.count <= 1}
                       style={ele.count <= 1  || loadingQuantity? { opacity: '.6', cursor: 'default' } : {}}
                       onClick={() => CountProduct(ele.product._id, ele.count, 'decrease')}
                       className="bg-[#f7f7f7] text-black p-2 border-[1px] border-gray-200 size-8 flex items-center justify-center hover:border-skyText rounded-full text-base hover:bg-white duration-200 cursor-pointer">
