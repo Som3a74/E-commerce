@@ -1,7 +1,8 @@
 'use client'
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination"
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, } from "@/components/ui/pagination"
 import { AllProductsType } from "../../../types/type";
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 
 interface props {
@@ -19,10 +20,13 @@ export default function PaginationProducts({ ProductsData }: props) {
                     {ProductsData.metadata.prevPage &&
                         <>
                             <PaginationItem>
-                                <PaginationPrevious
-                                    className="cursor-pointer"
-                                    onClick={() => router.push(`/product/?page=${ProductsData.metadata.prevPage}`)}
-                                />
+                                <Link
+                                    className="cursor-pointer font-medium"
+                                    // onClick={() => router.push(`/product/?page=${ProductsData.metadata.prevPage}`)}
+                                    href={`/product/?page=${ProductsData.metadata.prevPage}`}
+                                >
+                                    {'< '}Previous
+                                </Link>
                             </PaginationItem>
 
                             <PaginationItem onClick={() => router.push(`/product/?page=${ProductsData.metadata.prevPage}`)}>
@@ -70,10 +74,13 @@ export default function PaginationProducts({ ProductsData }: props) {
                             </PaginationItem>
 
                             <PaginationItem>
-                                <PaginationNext
-                                    className="cursor-pointer"
-                                    onClick={() => router.push(`/product/?page=${ProductsData.metadata.nextPage}`)}
-                                />
+                                <Link
+                                    className="cursor-pointer font-medium"
+                                    // onClick={() => router.push(`/product/?page=${ProductsData.metadata.prevPage}`)}
+                                    href={`/product/?page=${ProductsData.metadata.nextPage}`}
+                                >
+                                    next{' >'}
+                                </Link>
                             </PaginationItem>
                         </>
                     }
