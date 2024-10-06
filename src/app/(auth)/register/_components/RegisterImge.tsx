@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Loginbg from '../../../../assets/Loginbg.webp'
 
-export default function RegisterImg() {
+export default function RegisterImge() {
   return (
     <section className="relative hidden lg:block w-full h-[82vh] lg:col-span-5 xl:col-span-6">
       <Image src={Loginbg} alt='Loginbg' fill className="object-cover" />
