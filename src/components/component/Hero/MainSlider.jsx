@@ -23,15 +23,19 @@ export default function MainSlider() {
 
     return (
         <div className='overflow-hidden border-none hidden sm:block'>
-            <Slider {...settings} className='border-none'>
+            <Slider {...settings} className='border-none overflow-hidden'>
                 {showImage.map((ele, index) => (
-                    <div key={index} className="border-none">
+                    <div key={index} className="border-none overflow-hidden">
                         <Image
-                            className='w-full border-none rounded-md'
                             src={ele}
                             alt={`Banner Image ${index + 1}`}
-                            layout="responsive"
-                            objectFit="cover"
+                            width={1200}
+                            height={600}
+                            priority={index === 0} 
+                            style={{ objectFit: 'cover' }}
+                            sizes="(max-width: 768px) 70vw, (max-width: 1200px) 50vw, 33vw"
+                            className="w-full border-none rounded-md overflow-hidden"
+                            loading={index > 0 ? "lazy" : undefined}
                         />
                     </div>
                 ))}
@@ -39,4 +43,3 @@ export default function MainSlider() {
         </div>
     );
 }
-

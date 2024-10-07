@@ -7,7 +7,7 @@ export default function middleware(req) {
   if (!verify) {
     if (url.includes('/wishlist') ||  url.includes('/cart') ||  url.includes('/allorders') ||  url.includes('/Checkout') ||  url.includes('/stripe')) {
       console.log('donnnnnnnnnnnnnnnnne');
-      return NextResponse.redirect("http://localhost:3000/login");
+      return NextResponse.redirect("/login");
     }
   }
 }
