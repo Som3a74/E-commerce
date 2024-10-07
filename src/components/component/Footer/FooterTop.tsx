@@ -24,10 +24,12 @@ export default function FooterTop() {
                                         <Image
                                             src={item?.imageSrc}
                                             alt="image"
-                                            width={100}
-                                            height={100}
-                                            className="mx-auto h-16 w-16"
+                                            width={50}
+                                            height={50}
+                                            className="mx-auto"
+                                            style={{ height: 'auto', width: 'auto' }}
                                         />
+
                                     </div>
                                 </div>
                                 <div className="mt-3 sm:ml-6 lg:ml-0">

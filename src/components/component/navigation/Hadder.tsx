@@ -158,9 +158,9 @@ export default function Header() {
                     <div className="flex items-center gap-4">
 
                         <div className="flex">
-                            <DropdownMenu>
+                            <DropdownMenu >
 
-                                <DropdownMenuTrigger><FiUser className="font-bold text-2xl block" /></DropdownMenuTrigger>
+                                <DropdownMenuTrigger name="Ui User"><FiUser name="Ui2 User" className="font-bold text-2xl block" /></DropdownMenuTrigger>
 
                                 {token ?
                                     <DropdownMenuContent className="font-semibold">
