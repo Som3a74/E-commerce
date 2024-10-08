@@ -47,12 +47,13 @@ export default function page() {
 
 
       let success = await request.text()
-      console.log(JSON.parse(success).message)
 
       if (JSON.parse(success).message === 'success') {
-        console.log('save');
         saveTokenHandel(JSON.parse(success).token)
         router.replace('/')
+        setTimeout(() => {
+          window.location.reload();
+        }, 600);
       }
 
     } catch (error) {

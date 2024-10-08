@@ -19,8 +19,8 @@ export default function ProductList({ ProductsData }: props) {
 
                 :
                 <>
-                    {ProductsData.map((ele) =>
-                        <ProductItem key={ele._id} ProductsData={ele} />
+                    {ProductsData.map((ele, index) =>
+                        <ProductItem key={ele._id} ProductsData={ele} index={index} />
                     )}
                 </>
             }

@@ -35,6 +35,9 @@ export default function Header() {
     function LogOutHandel() {
         clearTokenHandel()
         router.push('/')
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
     }
 
     async function GetproductsHandel() {
