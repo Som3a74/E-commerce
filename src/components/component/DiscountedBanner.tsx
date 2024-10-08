@@ -16,8 +16,8 @@ export default function DiscountedBanner() {
         { title: "Women's Fashion", link: "6439d58a0049ad0b52b9003f" },
         { title: "Electronics", link: "6439d2d167d9aa4ca970649f" },
     ];
-    return (
 
+    return (
         <section>
             <SectionHadder linkText='View All Categories' text='Popular Search' link='/' show={false} />
 
@@ -33,15 +33,16 @@ export default function DiscountedBanner() {
                 ))}
             </div>
 
-
             <div className="w-full py-5 md:py-0 my-12 bg-[#f6f6f6] rounded-lg flex items-center justify-between overflow-hidden">
-                <Image
-                    src={discountImgOne}
-                    alt="discountedImgOne"
-                    width={200}
-                    height={200}
-                    className="hidden lg:inline-flex h-36"
-                />
+                <div className="relative w-[200px] h-[200px] hidden lg:inline-flex">
+                    <Image
+                        src={discountImgOne}
+                        alt="discountedImgOne"
+                        fill
+                        sizes="(max-width: 640px) 100px, (max-width: 768px) 150px, 200px"
+                        className="rounded-lg object-cover"
+                    />
+                </div>
                 <div className="flex flex-col flex-1 gap-1 items-center">
                     <div className="flex items-center justify-center gap-x-3 text-xl md:text-4xl font-bold">
                         <h2 className="text-darkAll">Sony Headphone</h2>
@@ -56,75 +57,35 @@ export default function DiscountedBanner() {
                         You’re out to play or stepping out to make
                     </p>
                 </div>
-                <Image
-                    src={discountImgTwo}
-                    alt="discountedImgTwo"
-                    width={200}
-                    height={200}
-                    className="hidden lg:inline-flex h-36"
-                />
+                <div className="relative w-[200px] h-[200px] hidden lg:inline-flex">
+                    <Image
+                        src={discountImgTwo}
+                        alt="discountedImgTwo"
+                        fill
+                        sizes="(max-width: 640px) 100px, (max-width: 768px) 150px, 200px"
+                        className="rounded-lg object-cover"
+                    />
+                </div>
             </div>
-
 
             <div className="mt-7">
                 <p className="font-bold text-2xl">Brands We Distribute</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-7">
-                    <div className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandOne}
-                            alt="brandOne"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
-                    <div className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandTwo}
-                            alt="brandTwo"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
-                    <div className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandThree}
-                            alt="brandThree"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
-                    <div className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandFour}
-                            alt="brandFour"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
-                    <div className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandFive}
-                            alt="brandFive"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
-                    <div className="border border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
-                        <Image
-                            src={brandSix}
-                            alt="brandSix"
-                            width={200}
-                            height={200}
-                            className="w-36 h-auto group-hover:opacity-50 duration-200"
-                        />
-                    </div>
+                    {[brandOne, brandTwo, brandThree, brandFour, brandFive, brandSix].map((brand, index) => (
+                        <div key={index} className="border border-r-0 border-gray-300 flex items-center justify-center px-6 py-2 cursor-pointer group">
+                            <div className="relative w-36 h-24"> 
+                                <Image
+                                    src={brand}
+                                    alt={`brand-${index + 1}`}
+                                    fill
+                                    sizes="(max-width: 640px) 100px, (max-width: 768px) 150px, 200px"
+                                    className="object-contain group-hover:opacity-50 duration-200"
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
     );
-};
+}

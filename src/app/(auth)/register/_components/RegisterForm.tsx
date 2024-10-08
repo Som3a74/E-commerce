@@ -18,7 +18,7 @@ export default function RegisterForm() {
     const [isLoading, setLoading] = useState(false)
     const [isError, setisError] = useState<null | string>(null)
 
-    const { token , saveTokenHandel } = useToken()
+    const { token, saveTokenHandel } = useToken()
     console.log(token)
 
     const { register, handleSubmit, formState: { errors }, getFieldState, trigger, setError, } = useForm<TFormInput>({
@@ -62,6 +62,9 @@ export default function RegisterForm() {
             if (JSON.parse(success).message === 'success') {
                 saveTokenHandel(JSON.parse(success).token)
                 router.replace('/')
+                setTimeout(() => {
+                    window.location.reload();
+                }, 600);
             }
 
         } catch (error) {
