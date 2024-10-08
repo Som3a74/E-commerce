@@ -16,8 +16,8 @@ export default function Hero() {
                             priority
                         />
 
-                        <div className={`absolute w-[50%] text-lightUi top-[10%] left-5`}>
-                            <h3 className="md:text-2xl font-extrabold mb-3" style={{ minHeight: '40px' }} >
+                        <div className={`absolute text-lightUi top-[10%] left-5`}>
+                            <h3 className="md:text-2xl font-extrabold mb-3" style={{ minHeight: '20px' }} >
                                 {ele.title}
                             </h3>
                             <p className="font-bold text-md md:text-lg mb-3" style={{ minHeight: '20px' }} >
