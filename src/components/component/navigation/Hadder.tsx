@@ -22,9 +22,9 @@ import ProductList from "../Product/ProductList";
 
 
 export default function Header() {
-    const { token, Storetoken , clearTokenHandel } = useToken()
+    const { token, Storetoken, clearTokenHandel } = useToken()
 
-    const {cartproducts, cartNum } = useCart()
+    const { cartproducts, cartNum } = useCart()
 
     const { wishNum, wishproducts } = useWish()
 
@@ -162,8 +162,9 @@ export default function Header() {
 
                         <div className="flex">
                             <DropdownMenu >
-
-                                <DropdownMenuTrigger name="Ui User"><FiUser name="Ui2 User" className="font-bold text-2xl block" /></DropdownMenuTrigger>
+                                <DropdownMenuTrigger aria-label="User menu">
+                                    <FiUser className="font-bold text-2xl block" />
+                                </DropdownMenuTrigger>
 
                                 {token ?
                                     <DropdownMenuContent className="font-semibold">
@@ -189,14 +190,25 @@ export default function Header() {
                                 <FiStar className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{wishproducts && Storetoken ? wishNum : 0}</Badge>
                             </Link>
-                            <ModeToggle/>
+                            <ModeToggle />
                         </div>
 
                         {/* mobile NavBar */}
                         <Sheet>
-                            <SheetTrigger asChild className="rounded md:hidden hover:text-gray-700 p-1  dark:bg-black">
-                                <IoMenu className="size-10 bg-gray cursor-pointer" />
+                            <SheetTrigger asChild>
+                                <button
+                                    aria-haspopup="dialog"
+                                    aria-expanded="false"
+                                    aria-controls="radix-:R796ja:"
+                                    aria-label="Menu"
+                                    className="rounded md:hidden hover:text-gray-700 p-1 dark:bg-black"
+                                >
+                                    <IoMenu className="size-9 bg-gray cursor-pointer" />
+                                </button>
                             </SheetTrigger>
+
+
+                            {/* </button> */}
                             <SheetContent className="py-32">
                                 <nav className="flex flex-col items-center gap-4">
                                     {bottomNavigation.map((ele, index) => {
