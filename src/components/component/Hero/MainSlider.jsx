@@ -33,7 +33,7 @@ export default function MainSlider() {
                             height={600}  
                             priority={index === 0}
                             style={{ objectFit: 'cover' }}
-                            sizes="100vw"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
                             className="w-full h-full border-none rounded-md overflow-hidden"
                         />
                     </div>

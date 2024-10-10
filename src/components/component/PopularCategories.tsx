@@ -20,7 +20,7 @@ export default async function PopularCategories() {
                         <div className="relative w-full h-full">
                             <Image
                                 src={ele.image}
-                                alt={ele.name}
+                                alt={ele.image + ele.slug}
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover object-top rounded-md group-hover:scale-110 transition-transform duration-300"

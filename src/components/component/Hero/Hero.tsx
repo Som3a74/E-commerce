@@ -4,16 +4,15 @@ import { HeroData } from '../../../utility/HeroData';
 export default function Hero() {
     return (
         <section>
-            <div className="mx-auto py-10 lg:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="mx-auto py-10 lg:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8">
                 {HeroData.map((ele) => (
-                    <div key={ele.title} className="flex-1 group relative rounded-lg cursor-pointer overflow-hidden" style={{ minHeight: '100px' }} >
+                    <div key={ele.title} className="group relative rounded-lg w-full h-[200px] cursor-pointer overflow-hidden">
                         <Image
                             src={ele.img}
-                            width={300}
-                            height={300}
                             alt={ele.title}
                             className="rounded-lg w-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            priority
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"  // Add the sizes prop
+                            fill
                         />
 
                         <div className={`absolute text-lightUi top-[10%] left-5`}>
