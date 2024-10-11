@@ -58,16 +58,16 @@ export default function ProductItem({ ProductsData, index }: Props) {
             </div>
 
             <div className="absolute top-1 -right-10 flex flex-col h-full group-hover:right-0 duration-300">
-                <span onClick={() => AddToWishHandel(ProductsData._id)} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    {isWished ? <FaStar className="text-red-500" /> : <CiStar className="text-DarkBeLight" />}
+                <span onClick={() => AddToWishHandel(ProductsData._id)} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
+                    {isWished ? <FaStar className="text-red-500" /> : <CiStar className="text-DarkBeLight hover:text-white" />}
                 </span>
 
-                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    <MdOutlineCompareArrows className="text-DarkBeLight" />
+                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
+                    <MdOutlineCompareArrows className="text-DarkBeLight hover:text-white" />
                 </span>
 
-                <Link href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-black duration-200">
-                    <FaEye className="text-DarkBeLight" />
+                <Link href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
+                    <FaEye className="text-DarkBeLight hover:text-white" />
                 </Link>
             </div>
         </div>
