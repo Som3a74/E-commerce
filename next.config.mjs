@@ -2,7 +2,8 @@
 const nextConfig = {
     images:{
         domains:['ecommerce.routemisr.com']
-    }
+    },
+    compress: true,
 };
 
 
