@@ -9,11 +9,14 @@ export default function Hero() {
                     <div key={ele.title} className="group relative rounded-lg w-full h-[200px] cursor-pointer overflow-hidden">
                         <Image
                             src={ele.img}
+                            // width={300}
+                            // height={300}
                             alt={ele.title}
                             className="rounded-lg w-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             fill
-                            priority={index === 0}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            priority={index === 0 ? true : false}
+                            loading={index !== 0 ? "lazy" : undefined}
                         />
 
                         <div className={`absolute text-lightUi top-[10%] left-5`}>

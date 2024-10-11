@@ -32,8 +32,9 @@ export default function SliderCategory({ CategoryData }: props) {
                                         className="rounded-full w-12 h-12 object-fill"
                                         style={{ objectFit: 'cover' }}
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        priority={index < 3 ? true : false} 
-                                        loading={index >= 3 ? "lazy" : undefined} 
+                                        // priority={index < 3 ? true : false} 
+                                        // loading={index >= 3 ? "lazy" : undefined} 
+                                        loading="lazy"
                                     />
                                     <span className="text-sm font-semibold">{ele.name}</span>
                                 </Link>
