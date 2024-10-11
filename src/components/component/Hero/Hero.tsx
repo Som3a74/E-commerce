@@ -9,17 +9,15 @@ export default function Hero() {
                     <div key={ele.title} className="group relative rounded-lg w-full h-[200px] cursor-pointer overflow-hidden">
                         <Image
                             src={ele.img}
-                            // width={300}
-                            // height={300}
                             alt={ele.title}
                             className="rounded-lg w-full object-cover group-hover:scale-110 transition-transform duration-300"
                             fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            priority={index === 0 ? true : false}
-                            loading={index !== 0 ? "lazy" : undefined}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Responsive sizes
+                            priority={index === 0} // Prioritize loading of the first image
+                            fetchPriority={index === 0 ? "high" : "low"} // Fetch priority for the first image
+                            loading={index !== 0 ? "lazy" : undefined} // Lazy load for non-first images
                         />
-
-                        <div className={`absolute text-lightUi top-[10%] left-5`}>
+                        <div className="absolute text-lightUi top-[10%] left-5">
                             <h3 className="md:text-2xl font-extrabold mb-3" style={{ minHeight: '20px' }} >
                                 {ele.title}
                             </h3>
