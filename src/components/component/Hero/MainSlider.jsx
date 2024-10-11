@@ -31,7 +31,7 @@ export default function MainSlider() {
                             alt={`Banner Image ${index + 1}`}
                             width={1200}
                             height={600}  
-                            priority
+                            loading="lazy"
                             style={{ objectFit: 'cover' }}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw"
                             className="w-full h-full border-none rounded-md overflow-hidden"
