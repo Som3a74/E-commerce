@@ -2,17 +2,21 @@
 import { useToken } from '../../../context/SaveToken';
 import NoOrders from './NoOrders';
 import OrderDetails from './OrderDetails';
+import GeneralPageSkeleton from "@/components/skeletons/GeneralPageSkeleton";
 
 export default function OrderContainer() {
 
-  const { deCodedToken } = useToken()
+  const { deCodedToken, Storetoken } = useToken()
   
   return (
     <section className=" my-10">
-      {deCodedToken ?
+      {deCodedToken ? (
         <OrderDetails deCodedToken={deCodedToken}/>
-        : <NoOrders />
-      }
+      ) : Storetoken ? (
+        <GeneralPageSkeleton />
+      ) : (
+        <NoOrders />
+      )}
     </section>
   )
 }

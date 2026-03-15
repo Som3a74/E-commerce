@@ -16,7 +16,7 @@ export default async function PopularCategories() {
 
             <div className='mx-auto py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8'>
                 {CategoryData.data.map((ele ,index) => (
-                    <Link key={ele._id} href={`/product/productFilters?categoryId=${ele._id}`} className='relative h-60 w-full group overflow-hidden cursor-pointer rounded-md'>
+                    <Link prefetch={false} key={ele._id} href={`/product/productFilters?categoryId=${ele._id}`} className='relative h-60 w-full group overflow-hidden cursor-pointer rounded-md'>
                         <div className="relative w-full h-full">
                             <Image
                                 src={ele.image}

@@ -1,0 +1,13 @@
+User-Agent: *
+Allow: /
+Allow: /product
+Allow: /blog
+Allow: /brands
+Disallow: /cart
+Disallow: /wishlist
+Disallow: /Checkout
+Disallow: /allorders
+Disallow: /login
+Disallow: /register
+
+Sitemap: https://shop-so3.com/sitemap.xml

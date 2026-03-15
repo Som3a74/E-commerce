@@ -121,47 +121,7 @@ export default function RegisterForm() {
                 IsFull={false}
             />
 
-            {/*             
-                <div className="col-span-6 sm:col-span-3">
-                    <label style={errors.name && { color: "red" }} htmlFor="name" className="block text-sm font-medium text-gray-700">First Name</label>
-                    <input {...register("name")} style={errors.name && { border: "1px solid red" }} type="text" id="name" name="name" className="mt-1 w-full rounded-lg border border-gray-200 p-3 pe-12 text-sm shadow-sm  focus:border-sky-400 bg-white text-gray-700" />
-                    {errors.name && <h6 className="p-1 text-sm text-red-800">{errors.name?.message}</h6>}
-                </div> 
-
-                <div className="col-span-6 sm:col-span-3">
-                    <label style={errors.phone && { color: "red" }} htmlFor="phone" className="block text-sm font-medium text-gray-700">phone</label>
-                    <input {...register("phone")} style={errors.phone && { border: "1px solid red" }} type="tel" id="phone" name="phone" className="mt-1 w-full rounded-lg border border-gray-200 p-3 pe-12 text-sm shadow-sm  focus:border-sky-400 bg-white text-gray-700" />
-                    {errors.phone && <h6 className="p-1 text-sm text-red-500">{errors.phone.message}</h6>}
-                </div>
-
-                <div className="col-span-6">
-                    <label style={errors.email && { color: "red" }} htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                    <input {...register("email")} style={errors.email && { border: "1px solid red" }} type="email" id="email" name="email" className="mt-1 w-full rounded-lg border border-gray-200 p-3 pe-12 text-sm shadow-sm  focus:border-sky-400 bg-white text-gray-700" />
-                    {errors.email && <h6 className="p-1 text-sm text-red-500">{errors.email.message}</h6>}
-                </div>
-
-                <div className="col-span-6 sm:col-span-3">
-                    <label style={errors.password && { color: "red" }} htmlFor="password" className="block text-sm font-medium text-gray-700">password</label>
-                    <input {...register("password")} style={errors.password && { border: "1px solid red" }} type="password" id="password" name="password" className="mt-1 w-full rounded-lg border border-gray-200 p-3 pe-12 text-sm shadow-sm  focus:border-sky-400 bg-white text-gray-700" />
-                    {errors.password && <h6 className="p-1 text-sm text-red-500">{errors.password.message}</h6>}
-                </div>
-
-
-                <div className="col-span-6 sm:col-span-3">
-                    <label style={errors.rePassword && { color: "red" }} htmlFor="rePassword" className="block text-sm font-medium text-gray-700">Password Confirmation</label>
-                    <input {...register("rePassword")} style={errors.rePassword && { border: "1px solid red" }} type="password" id="rePassword" name="rePassword" className="mt-1 w-full rounded-lg border border-gray-200 p-3 pe-12 text-sm shadow-sm  focus:border-sky-400 bg-white text-gray-700" />
-                    {errors.rePassword && <h6 className="p-1 text-sm text-red-500">{errors.rePassword.message}</h6>}
-                </div>
-            */}
-
-
-
-
-
-
-
             <RegisterFooter />
-
 
             {isError &&
                 <ErrorMassege isError={isError} />

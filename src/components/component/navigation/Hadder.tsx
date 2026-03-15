@@ -9,13 +9,15 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger, } from "@/components/ui/
 import { IoMenu } from "react-icons/io5";
 import { Badge } from "@/components/ui/badge"
 import { bottomNavigation } from '../../../utility/HeaderData'
-import { ModeToggle } from './ModeToggle';
 import { useToken } from "../../../context/SaveToken";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useCart } from "../../../context/Cart";
 import { useWish } from "../../../context/wishlist";
+import { useCompare } from "../../../context/CompareContext";
+import { MdOutlineCompareArrows } from "react-icons/md";
+import CompareModal from "../Compare/CompareModal";
 import { AllProductsType, TypeProductsDate } from './../../../types/type';
 import ProductList from "../Product/ProductList";
 
@@ -28,8 +30,10 @@ export default function Header() {
 
     const { wishNum, wishproducts } = useWish()
 
+    const { compareItems, openCompare } = useCompare()
     const [filteredProducts, setFilteredProducts] = useState<TypeProductsDate[]>([]);
     const [result, setresult] = useState<TypeProductsDate[]>([]);
+    const [hasFetchedProducts, setHasFetchedProducts] = useState(false);
 
     const router = useRouter()
     function LogOutHandel() {
@@ -41,6 +45,7 @@ export default function Header() {
     }
 
     async function GetproductsHandel() {
+        if (hasFetchedProducts) return;
         try {
             const request = await fetch(`https://ecommerce.routemisr.com/api/v1/products`, {
                 method: 'GET',
@@ -51,6 +56,7 @@ export default function Header() {
             else {
                 const ProductsData: AllProductsType = await request.json();
                 setFilteredProducts(ProductsData.data)
+                setHasFetchedProducts(true);
             }
         } catch (error) {
             console.log(error)
@@ -67,8 +73,7 @@ export default function Header() {
     }
 
     useEffect(() => {
-        GetproductsHandel()
-        document.body.onclick = function (e) {
+        const handleClickOutside = (e: MouseEvent) => {
             const searchBar = document.getElementById('SearchBarEle');
             const EyesEle = document.getElementsByClassName('EyesEle');
             const ImageEle = document.getElementsByClassName('ImageEle');
@@ -86,6 +91,12 @@ export default function Header() {
                     }
                 }
             }
+        };
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.body.removeEventListener('click', handleClickOutside);
         };
     }, [])
 
@@ -148,7 +159,11 @@ export default function Header() {
                             id="Search"
                             placeholder="Search for..."
                             className="w-full rounded-full  border-2 border-gray-300 0 p-2.5 pe-10 shadow-sm sm:text-sm"
-                            onKeyUp={e => HandelSearch((e.target as HTMLInputElement).value)}
+                            onFocus={GetproductsHandel}
+                            onChange={e => {
+                                GetproductsHandel();
+                                HandelSearch(e.target.value);
+                            }}
                         />
 
                         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
@@ -168,13 +183,17 @@ export default function Header() {
 
                                 {token ?
                                     <DropdownMenuContent className="font-semibold">
-                                        <DropdownMenuItem><Link href='/'>Profile</Link></DropdownMenuItem>
+                                        {/* <DropdownMenuItem><Link prefetch={false} href='/'>Profile</Link></DropdownMenuItem> */}
                                         <DropdownMenuItem onClick={LogOutHandel}><div>log out</div></DropdownMenuItem>
                                     </DropdownMenuContent>
                                     :
-                                    <DropdownMenuContent className="font-semibold">
-                                        <DropdownMenuItem><Link href='/register'>register</Link></DropdownMenuItem>
-                                    </DropdownMenuContent>
+                                    <Link prefetch={false} href='/register'>
+                                        <DropdownMenuContent className="font-semibold">
+                                            <DropdownMenuItem>
+                                                register
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </Link>
                                 }
 
 
@@ -182,15 +201,18 @@ export default function Header() {
                         </div>
 
                         <div className='flex items-center gap-4'>
-                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
+                            <Link prefetch={false} className='flex relative items-center gap-1 cursor-pointer text-xl' href='/cart'>
                                 <FiShoppingBag className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{cartproducts && Storetoken ? cartNum : 0}</Badge>
                             </Link>
-                            <Link className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
+                            <Link prefetch={false} className='flex relative items-center gap-1 cursor-pointer text-xl' href='/wishlist'>
                                 <FiStar className="text-2xl" />
                                 <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{wishproducts && Storetoken ? wishNum : 0}</Badge>
                             </Link>
-                            <ModeToggle />
+                            <button onClick={openCompare} className='flex relative items-center gap-1 cursor-pointer text-xl hover:text-teal-600 transition'>
+                                <MdOutlineCompareArrows className="text-3xl" />
+                                <Badge className="px-1 absolute -top-1 -right-[4px] py-0 font-sans text-xs" variant="destructive">{compareItems ? compareItems.length : 0}</Badge>
+                            </button>
                         </div>
 
                         {/* mobile NavBar */}
@@ -214,7 +236,7 @@ export default function Header() {
                                     {bottomNavigation.map((ele, index) => {
                                         return (
                                             <SheetClose key={index} asChild>
-                                                <Link href={ele.link}
+                                                <Link prefetch={false} href={ele.link}
                                                     className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "w-full justify-start")}
                                                 >
                                                     <span>{ele.title}</span>
@@ -236,6 +258,7 @@ export default function Header() {
             </div>
 
             <NavBar bottomNavigation={bottomNavigation} />
+            <CompareModal />
         </header >
     )
 }
