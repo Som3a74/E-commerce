@@ -249,7 +249,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="text-xs text-gray dark:text-white">&copy; 2022. Company Name. All rights reserved.</p>
+        <p className="text-xs text-gray ">&copy; 2022. Company Name. All rights reserved.</p>
       </div>
     </footer>
   )

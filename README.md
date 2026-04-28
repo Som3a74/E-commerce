@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Shop So3 - متجر إلكتروني متكامل بـ Next.js 🛍️
 
-## Getting Started
+**Shop So3** هو تطبيق متجر إلكتروني عصري ومتطور تم بناؤه باستخدام **Next.js 14**، ويوفر تجربة تسوق سلسة وسريعة للمستخدمين. يتميز المشروع بتصميم متميز واحترافي يركز على سهولة الاستخدام والأداء العالي.
 
-First, run the development server:
+## ✨ المميزات الرئيسية
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🚀 **أداء فائق السرعة**: بفضل استخدام Next.js وتقنيات الـ Server-side Rendering (SSR).
+- 📱 **تصميم متجاوب بالكامل**: يعمل بشكل مثالي على جميع الأجهزة (موبايل، تابلت، ديسكتوب).
+- 🔍 **نظام بحث ذكي**: ابحث عن منتجاتك المفضلة بسرعة وسهولة.
+- 🛒 **سلة تسوق متطورة**: إدارة المنتجات في السلة بسهولة تامة.
+- ❤️ **قائمة الأمنيات (Wishlist)**: حفظ المنتجات التي تود شرائها لاحقاً.
+- ⚖️ **مقارنة المنتجات**: أداة لمقارنة مواصفات المنتجات جنباً إلى جنب لاتخاذ القرار الصحيح.
+- 🔐 **نظام توثيق آمن**: تسجيل دخول وإنشاء حساب للمستخدمين لإدارة طلباتهم.
+- ⚡ **واجهة مستخدم عصرية**: استخدام مكونات ShadcnUI و Radix UI لتجربة مستخدم فاخرة.
+
+## 🛠️ التقنيات المستخدمة
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/) & [Radix UI](https://www.radix-ui.com/)
+- **State Management**: React Context API
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Animations**: [Tailwind CSS Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+- **Forms**: React Hook Form & Zod
+- **Notifications**: Sonner (Toaster)
+
+## 🚀 بدء العمل
+
+لشغل المشروع محلياً على جهازك، اتبع الخطوات التالية:
+
+1. **استنساخ المستودع (Clone):**
+   ```bash
+   git clone https://github.com/your-username/ecommerce-next.git
+   ```
+
+2. **تثبيت الاعتماديات (Dependencies):**
+   ```bash
+   npm install
+   ```
+
+3. **تشغيل خادم التطوير:**
+   ```bash
+   npm run dev
+   ```
+
+4. **افتح المتصفح على:**
+   [http://localhost:3000](http://localhost:3000)
+
+## 📁 هيكل المشروع
+
+```text
+src/
+├── app/            # صفحات التطبيق (App Router)
+├── components/     # المكونات القابلة لإعادة الاستخدام (UI & Layout)
+├── context/        # إدارة الحالة (Cart, Wishlist, Token)
+├── lib/            # الدوال المساعدة (Utils)
+├── assets/         # الصور والملفات الثابتة
+├── types/          # تعريفات TypeScript
+└── utility/        # بيانات ومرافق إضافية
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📄 الترخيص
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+هذا المشروع متاح تحت ترخيص MIT.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+تم تطويره بكل ❤️ بواسطة [Som3a]
