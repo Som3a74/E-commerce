@@ -13,7 +13,7 @@ const RegisterInput: React.FC<FormFieldProps> = ({ type, onBlur, register, nameI
 
     return (
         <div className={`col-span-6 ${!IsFull && 'sm:col-span-3'}`} >
-            <label style={error && { color: "red" }} htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-GrayBeLight">{lableInput}</label>
+            <label style={error && { color: "red" }} htmlFor={nameInput} className="block text-sm font-medium text-gray-700 dark:text-GrayBeLight">{lableInput}</label>
             <input
                 type={type}
                 {...register(nameInput)}

@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
+import CameraVideo from "@/assets/CameraVideo.svg"
+import Image from "next/image"
 
 export default function Footer() {
   const [isLoggedIn, setisLoggedIn] = useState(false)
@@ -58,9 +60,11 @@ export default function Footer() {
             </div>
 
             <p className="mt-4 max-w-xs text-gray">
+              {/* <CameraVideo className="stroke-2 text-gray"/> */}
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae nam
               molestias.
             </p>
+            <Image className="stroke-10" src={CameraVideo} alt="Camera Video" />
 
             <ul className="mt-8 flex gap-6">
               <li>
@@ -245,7 +249,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="text-xs text-gray dark:text-white">&copy; 2022. Company Name. All rights reserved.</p>
+        <p className="text-xs text-gray ">&copy; 2022. Company Name. All rights reserved.</p>
       </div>
     </footer>
   )

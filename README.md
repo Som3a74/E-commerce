@@ -1,3 +1,31 @@
+# Shop So3 - متجر إلكتروني متكامل بـ Next.js 🛍️
+
+**Shop So3** هو تطبيق متجر إلكتروني عصري ومتطور تم بناؤه باستخدام **Next.js 14**، ويوفر تجربة تسوق سلسة وسريعة للمستخدمين. يتميز المشروع بتصميم متميز واحترافي يركز على سهولة الاستخدام والأداء العالي.
+
+## ✨ المميزات الرئيسية
+
+- 🚀 **أداء فائق السرعة**: بفضل استخدام Next.js وتقنيات الـ Server-side Rendering (SSR).
+- 📱 **تصميم متجاوب بالكامل**: يعمل بشكل مثالي على جميع الأجهزة (موبايل، تابلت، ديسكتوب).
+- 🔍 **نظام بحث ذكي**: ابحث عن منتجاتك المفضلة بسرعة وسهولة.
+- 🛒 **سلة تسوق متطورة**: إدارة المنتجات في السلة بسهولة تامة.
+- ❤️ **قائمة الأمنيات (Wishlist)**: حفظ المنتجات التي تود شرائها لاحقاً.
+- ⚖️ **مقارنة المنتجات**: أداة لمقارنة مواصفات المنتجات جنباً إلى جنب لاتخاذ القرار الصحيح.
+- 🔐 **نظام توثيق آمن**: تسجيل دخول وإنشاء حساب للمستخدمين لإدارة طلباتهم.
+- ⚡ **واجهة مستخدم عصرية**: استخدام مكونات ShadcnUI و Radix UI لتجربة مستخدم فاخرة.
+
+## 🛠️ التقنيات المستخدمة
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/) & [Radix UI](https://www.radix-ui.com/)
+- **State Management**: React Context API
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Animations**: [Tailwind CSS Animate](https://github.com/jamiebuilds/tailwindcss-animate)
+- **Forms**: React Hook Form & Zod
+- **Notifications**: Sonner (Toaster)
+
+## 🚀 بدء العمل
+=======
 🌐 Explore website: [https://lnkd.in/dYXAW_NV](https://e-commerce-feor.vercel.app/)
 
 🚀 New Project 🚀
@@ -36,21 +64,42 @@ I focused on clean code and best practices:
 
 ✅ Using next/script to minimize main-thread work.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+لشغل المشروع محلياً على جهازك، اتبع الخطوات التالية:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **استنساخ المستودع (Clone):**
+   ```bash
+   git clone https://github.com/your-username/ecommerce-next.git
+   ```
 
-## Learn More
+2. **تثبيت الاعتماديات (Dependencies):**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **تشغيل خادم التطوير:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **افتح المتصفح على:**
+   [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📁 هيكل المشروع
 
-## Deploy on Vercel
+```text
+src/
+├── app/            # صفحات التطبيق (App Router)
+├── components/     # المكونات القابلة لإعادة الاستخدام (UI & Layout)
+├── context/        # إدارة الحالة (Cart, Wishlist, Token)
+├── lib/            # الدوال المساعدة (Utils)
+├── assets/         # الصور والملفات الثابتة
+├── types/          # تعريفات TypeScript
+└── utility/        # بيانات ومرافق إضافية
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 الترخيص
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+هذا المشروع متاح تحت ترخيص MIT.
+
+---
+تم تطويره بكل ❤️ بواسطة [Som3a]

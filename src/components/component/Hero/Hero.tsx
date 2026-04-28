@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { HeroData } from '../../../utility/HeroData';
-
+import Link from 'next/link';
 export default function Hero() {
     return (
         <section>
             <div className="mx-auto py-10 lg:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-8">
                 {HeroData.map((ele, index) => (
-                    <div key={ele.title} className="group relative rounded-lg w-full h-[200px] cursor-pointer overflow-hidden">
+                    <Link prefetch={false} key={ele.title} href={"/product"} className="group relative rounded-lg w-full h-[200px] cursor-pointer overflow-hidden">
                         <Image
                             src={ele.img}
                             alt={ele.title}
@@ -25,7 +25,7 @@ export default function Hero() {
                                 {ele.form}
                             </p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>

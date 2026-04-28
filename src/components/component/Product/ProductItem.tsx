@@ -8,19 +8,23 @@ import { TypeProductsDate } from '../../../types/type';
 import BtnAddToCart from "./BtnAddToCart";
 import { useWish } from "../../../context/wishlist";
 import { FaStar } from "react-icons/fa";
+import { useCompare } from "../../../context/CompareContext";
 
 type Props = {
     ProductsData: TypeProductsDate;
-    index: number; 
+    index: number;
 };
 
 export default function ProductItem({ ProductsData, index }: Props) {
     const { wishID, AddToWishHandel } = useWish();
     const isWished = wishID.includes(ProductsData._id);
 
+    const { compareItems, addToCompare, removeFromCompare } = useCompare();
+    const isCompared = compareItems.some(item => item._id === ProductsData._id);
+
     return (
         <div className="relative w-full max-w-xs overflow-hidden group rounded-lg border-gray-200 border bg-lightUi shadow-md p-1 hover:border-darkUi duration-200 cursor-pointer">
-            <Link href={`/productDetails/${ProductsData._id}`} className="ImageEle relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300">
+            <Link prefetch={false} href={`/productDetails/${ProductsData._id}`} className="ImageEle relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl group-hover:scale-105 duration-300">
                 <Image
                     src={ProductsData.imageCover}
                     alt={ProductsData.title}
@@ -62,11 +66,11 @@ export default function ProductItem({ ProductsData, index }: Props) {
                     {isWished ? <FaStar className="text-red-500" /> : <CiStar className="text-DarkBeLight hover:text-white" />}
                 </span>
 
-                <span className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
-                    <MdOutlineCompareArrows className="text-DarkBeLight hover:text-white" />
+                <span onClick={() => isCompared ? removeFromCompare(ProductsData._id) : addToCompare(ProductsData)} className="w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
+                    <MdOutlineCompareArrows className={isCompared ? "text-blue-600" : "text-DarkBeLight hover:text-white"} />
                 </span>
 
-                <Link href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
+                <Link prefetch={false} href={`/productDetails/${ProductsData._id}`} className="EyesEle w-10 h-10 inline-flex text-darkUi text-2xl items-center justify-center rounded-full hover:text-white hover:bg-DarkBeLight duration-200">
                     <FaEye className="text-DarkBeLight hover:text-white" />
                 </Link>
             </div>
